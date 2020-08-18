@@ -12,5 +12,4 @@ const {
     client.commands = new Map;
     await registerCommands(client, '../commands');
     await registerEvents(client, '../events');
-    console.log(client.commands);
 })();

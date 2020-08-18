@@ -1,11 +1,27 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
+const { MessageEmbed } = require('discord.js');
+const Client = require('nekos.life');
+const neko = new Client();
 
 module.exports = class kiss extends BaseCommand {
     constructor () {
         super('kiss', 'fun', true, 'Kiss the mentioned person', '!kiss <mention>');
     }
 
-    async run() {
-        console.log('Please kiss me .-.');
+    async run(client, message) {
+
+    if (!message.mentions.users.first()) return message.reply("You need to mention someone to kiss them .-.");
+    if (message.mentions.users.first().id == client.user.id && message.author.id !== "345609067181375490") return message.reply("No kissing unless you're my Dev !");
+    if (message.mentions.users.first().id == message.author.id) return message.reply(" W T F  ? !");
+    if (message.mentions.users.first().id == client.user.id && message.author.id == "345609067181375490") return message.reply("B-Baka, it's not like I like it or anything >///<");
+
+        let embed = new MessageEmbed();
+
+        embed.setTitle(`${message.author.username} kissed ${message.mentions.first().username} UwU`)
+             .setColor('#800080')
+             .setImage(await (await neko.sfw.kiss()).url)
+             .setTimestamp();
+
+        message.channel.send(embed);
     }
 }
