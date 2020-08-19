@@ -2,6 +2,7 @@ require('dotenv').config();
 const BaseEvent = require('../utils/structures/BaseEvent');
 const { noArgs } = require('../utils/noargs');
 const { errorMessage } = require('../utils/errormessage');
+const { commandNotFound } = require('../utils/commandnotfound');
 
 module.exports = class MesssageEvent extends BaseEvent {
     constructor () {
@@ -19,14 +20,16 @@ module.exports = class MesssageEvent extends BaseEvent {
             const command = client.commands.get(cmdName);
 
             if(!command) {
-                await errorMessage(message);
+                await commandNotFound(message);
 
             } else if(cmdArgs == '' && command.args) {
                 await noArgs(message);
 
             } else if (command) {
                 command.run(client, message, cmdArgs)
-                       .catch(err => console.log(err));
+                       .catch(err => {
+                           errorMessage(message, err).then(console.log(err.message));
+                       });
             }
         }
     }

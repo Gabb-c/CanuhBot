@@ -3,10 +3,19 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = class roll extends BaseCommand {
     constructor () {
-        super('roll', 'fun', true, 'Roll a D4 . . . D20 !', '!roll <dice_type>');
+        super('roll', 'fun', false, 'Roll a D20 !', '!roll');
     }
 
     async run(client, message, cmdArgs) {
-        console.log('Rolling the dice!');
+        let msg = await message.channel.send('Rolling . . .');
+
+        msg.edit({ embed: {
+            title: "R O L L",
+            description: [ `${message.author.username} rolled a ${Math.floor(Math.random() * 20) + 1} !` ].join("\n"),
+            footer: { text: "Requested by " + message.author.tag, icon_url: message.author.displayAvatarURL() },
+            timestamp: new Date(),
+            color: '#800080'
+        }});
+
     }
 }

@@ -1,9 +1,9 @@
 const { MessageEmbed } = require('discord.js');
 
-async function errorMessage(message, Error) {
+async function commandNotFound(message) {
     let embed = new MessageEmbed();
 
-    embed.setTitle(Error.message.toUpperCase())
+    embed.setTitle('O H    J E E Z    !')
          .setDescription(message.author.username + ', I think you misstyped the command  .-. \nCheck the !help <command_name> command to more info UwU')
          .setTimestamp()
          .setColor('#800080');
@@ -11,4 +11,4 @@ async function errorMessage(message, Error) {
     message.channel.send(embed);
 }
 
-module.exports = { errorMessage };
+module.exports = { commandNotFound };
