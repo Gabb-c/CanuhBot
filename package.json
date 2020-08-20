@@ -14,6 +14,7 @@
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "nekos.life": "^2.0.7",
+    "node-fetch": "^2.6.0",
     "nodemon": "^2.0.4"
   }
 }

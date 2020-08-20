@@ -17,6 +17,7 @@ module.exports = class MesssageEvent extends BaseEvent {
                                                  .toLowerCase()
                                                  .slice(process.env.BOT_PREFIX.length)
                                                  .split(/\s+/);
+                                                 
             const command = client.commands.get(cmdName);
 
             if(!command) {

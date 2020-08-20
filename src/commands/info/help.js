@@ -11,11 +11,12 @@ module.exports = class help extends BaseCommand {
         let embed = new MessageEmbed();
 
         if(command) {
-            embed.setTitle(command.name.toUpperCase())
+            embed.setTitle(`📌  ${command.name.toUpperCase()}  📌`)
                  .setDescription('DESCRIPTION: ' + command.description + '\n' +
                                  'STRUCTURE: '   + command.structure           )
                  .setColor('#800080')
-                 .setTimestamp();
+                 .setTimestamp()
+                 .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL());
             
             message.channel.send(embed)
                            .catch(err => console.log(err));
@@ -27,9 +28,10 @@ module.exports = class help extends BaseCommand {
                                true);
             });
 
-            embed.setTitle('B   O   T     H   E   L   P    !')
+            embed.setTitle('📌 B   O   T     H   E   L   P    ! 📌')
                  .setColor('#800080')
-                 .setTimestamp();
+                 .setTimestamp()
+                 .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL());
 
             message.channel.send(embed)
                            .catch(err => console.log(err));

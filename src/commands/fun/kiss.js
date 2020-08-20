@@ -11,7 +11,7 @@ module.exports = class kiss extends BaseCommand {
     async run(client, message) {
 
         if (!message.mentions.users.first()) {
-            throw new Error("You need to mention someone to kiss !");
+            throw new Error("You need to mention someone to kiss . . .");
         }
         if (message.mentions.users.first().id == client.user.id && message.author.id !== "345609067181375490") return message.reply("No kissing unless you're my Dev !");
         if (message.mentions.users.first().id == message.author.id) return message.reply(" W T F  ? !");
@@ -25,5 +25,6 @@ module.exports = class kiss extends BaseCommand {
                  .setTimestamp();
 
             message.channel.send(embed);
+
     }
 }
