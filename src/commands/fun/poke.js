@@ -18,7 +18,7 @@ module.exports = class Poke extends BaseCommand{
 
         let embed = new MessageEmbed();
 
-        embed.setTitle(`${message.author.username} poked ${message.mentions.first().username} !`)
+        embed.setTitle(`${message.author.username} poked ${message.mentions.users.first().username} !`)
              .setImage(await (await neko.sfw.poke()).url)
              .setColor('#800080')
              .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL())

@@ -18,7 +18,7 @@ module.exports = class Pat extends BaseCommand {
         if (message.mentions.users.first().id == client.user.id && message.author.id == "345609067181375490") return message.reply("B-Baka! >///<");
 
         let embed = new MessageEmbed()
-            .setTitle(`${message.author.username} is patting ${message.mentions.first().username} :3`)
+            .setTitle(`${message.author.username} is patting ${message.mentions.users.first().username} :3`)
             .setImage(await (await neko.sfw.pat()).url)
             .setColor('#800080')
             .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL())

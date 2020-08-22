@@ -9,7 +9,7 @@ module.exports = class kiss extends BaseCommand {
     }
 
     async run(client, message) {
-
+    
         if (!message.mentions.users.first()) {
             throw new Error("You need to mention someone to kiss . . .");
         }
@@ -19,7 +19,7 @@ module.exports = class kiss extends BaseCommand {
 
             let embed = new MessageEmbed();
 
-            embed.setTitle(`${message.author.username} kissed ${message.mentions.first().username} UwU`)
+            embed.setTitle(`${message.author.username} kissed ${message.mentions.users.first().username} UwU`)
                  .setColor('#800080')
                  .setImage(await (await neko.sfw.kiss()).url)
                  .setTimestamp();
