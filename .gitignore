@@ -7,6 +7,10 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# Lavalink
+Lavalink.jar
+application.yml
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
