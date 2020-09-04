@@ -1,4 +1,5 @@
 const BaseEvent = require('../utils/structures/BaseEvent');
+const boxen = require('boxen');
 
 module.exports = class NodeConnect extends BaseEvent {
     constructor() {
@@ -6,7 +7,7 @@ module.exports = class NodeConnect extends BaseEvent {
     }
 
     async run(client, node) {
-        console.log('New node connected!', node);
+        console.log(boxen('New node connected!', { padding: 1, borderColor: '#ff0883'}));
     }
 
 }

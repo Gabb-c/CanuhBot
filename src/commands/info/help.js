@@ -1,9 +1,10 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const { MessageEmbed } = require('discord.js');
+require('dotenv').config();
 
 module.exports = class help extends BaseCommand {
     constructor(){
-        super('help', 'info', false, 'Shows information about the bot fuctionalities!', '!help < command_name >');
+        super('help', 'info', false, 'Shows information about the bot fuctionalities!', `${process.env.BOT_PREFIX}help < command_name >`);
     }
 
     async run(client, message, cmdArgs) {

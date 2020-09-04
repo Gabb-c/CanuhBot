@@ -1,11 +1,11 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const fetch = require('node-fetch');
 const url = 'https://pokeapi.co/api/v2/pokemon/';
-
+require('dotenv').config();
 module.exports = class Pokemon extends BaseCommand {
 
     constructor() {
-        super('pokemon', 'fun', true, 'Shows information of a pokemon', '!pokemon <pokemon_name>');
+        super('pokemon', 'fun', true, 'Shows information of a pokemon', `${process.env.BOT_PREFIX}pokemon  < pokemon_name >`);
     }
 
     async run(client, message, cmdArgs) {

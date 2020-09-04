@@ -1,9 +1,9 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const { MessageEmbed } = require('discord.js');
-
+require('dotenv').config();
 module.exports = class roll extends BaseCommand {
     constructor () {
-        super('roll', 'fun', false, 'Roll a D20 !', '!roll');
+        super('roll', 'fun', false, 'Roll a D20 !', `${process.env.BOT_PREFIX}roll`);
     }
 
     async run(client, message, cmdArgs) {

@@ -1,5 +1,6 @@
 require('dotenv').config();
 const BaseEvent = require('../utils/structures/BaseEvent');
+const boxen = require('boxen');
 const { noArgs } = require('../utils/noargs');
 const { errorMessage } = require('../utils/errormessage');
 const { commandNotFound } = require('../utils/commandnotfound');
@@ -29,7 +30,7 @@ module.exports = class MesssageEvent extends BaseEvent {
             } else if (command) {
                 command.run(client, message, cmdArgs)
                        .catch(err => {
-                           errorMessage(message, err).then(console.log(err.message));
+                           errorMessage(message, err).then(console.log(boxen(err.message, { padding: 1, borderColor: "red" })));
                        });
             }
         }

@@ -2,13 +2,14 @@ const BaseCommand = require('../../utils/structures/BaseCommand')
 const { MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
 const querystring = require('querystring');
+require('dotenv').config();
 
 
 module.exports = class Urban extends BaseCommand {
 
     constructor() {
 
-        super('urban', 'info', true, 'A search on Urban Dictionary', '!urban <word>');
+        super('urban', 'info', true, 'A search on Urban Dictionary', `${process.env.BOT_PREFIX}urban  < word >`);
     
     }
 

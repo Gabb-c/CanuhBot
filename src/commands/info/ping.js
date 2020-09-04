@@ -1,9 +1,10 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 const { MessageEmbed } = require('discord.js');
+require('dotenv').config();
 
 module.exports = class ping extends BaseCommand {
     constructor () {
-        super('ping', 'info', false, 'Shows the ping of the bot in ms!', '!ping');
+        super('ping', 'info', false, 'Shows the ping of the bot in ms!', `${process.env.BOT_PREFIX}ping`);
     }
 
     async run(client, message) {

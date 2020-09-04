@@ -2,10 +2,10 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 const { MessageEmbed } = require('discord.js');
 const Client = require('nekos.life')
 const neko = new Client();
-
+require('dotenv').config();
 module.exports = class Poke extends BaseCommand{
     constructor(){
-        super('poke', 'fun', true, 'Pokes the mentioned person!', '!poke <mentioned_person>');
+        super('poke', 'fun', true, 'Pokes the mentioned person!', `${process.env.BOT_PREFIX}poke  < mention >`);
     }
 
     async run(client, message, cmdArgs) {

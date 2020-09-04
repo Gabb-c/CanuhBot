@@ -2,10 +2,11 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 const { MessageEmbed } = require('discord.js');
 const Client = require('nekos.life');
 const neko = new Client();
+require('dotenv').config();
 
 module.exports = class Baka extends BaseCommand {
     constructor() {
-        super('baka', 'fun', false, 'Baka baka baka', '!baka');
+        super('baka', 'fun', false, 'Baka baka baka', `${process.env.BOT_PREFIX}baka`);
     }
 
     async run(client, message, cmdArgs) {
