@@ -1,13 +1,19 @@
 const { Client } = require('discord.js');
 const { ErelaClient } = require('erela.js');;
 const client = new Client;
+const raven = require('raven');
 require('dotenv').config();
 
 const {
     registerCommands,
-    registerEvents,
-    registerMusicEvents
+    registerDiscordEvents,
+    registerMusicEvents,
+    registerProcessEvents
 } = require('./utils/register');
+
+raven.config(process.env.SENTRY_KEY, {
+    captureUnhandledRejections: true
+}).install();
 
 (async () => {
     await client.login(process.env.BOT_TOKEN);
@@ -18,11 +24,14 @@ const {
             password: process.env.PASSWORD
         }
     ]);
-    await registerMusicEvents(client.music, '../musicevents');
+    await registerMusicEvents(client.music, '../events/music-events');
 })();
 
 (async () => {
     client.commands = new Map;
+    process.events = new Map;
     await registerCommands(client, '../commands');
-    await registerEvents(client, '../events');
+    await registerDiscordEvents(client, '../events/discord-events');
+    await registerProcessEvents('../events/process');
 })();
+

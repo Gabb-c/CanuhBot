@@ -17,6 +17,7 @@
     "erela.js": "^1.1.8",
     "nekos.life": "^2.0.7",
     "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "raven": "^2.6.4"
   }
 }

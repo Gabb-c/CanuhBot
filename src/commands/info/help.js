@@ -19,8 +19,7 @@ module.exports = class help extends BaseCommand {
                  .setTimestamp()
                  .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL());
             
-            message.channel.send(embed)
-                           .catch(err => console.log(err));
+            message.channel.send(embed);
         }
         else {
             client.commands.forEach(c => {
@@ -34,8 +33,7 @@ module.exports = class help extends BaseCommand {
                  .setTimestamp()
                  .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL());
 
-            message.channel.send(embed)
-                           .catch(err => console.log(err));
+            message.channel.send(embed);
         }
     }
 }

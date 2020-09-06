@@ -1,14 +1,23 @@
 const { MessageEmbed } = require('discord.js');
+const boxen = require('boxen');
+const raven = require('raven');
 
-async function errorMessage(message, Error) {
-    let embed = new MessageEmbed();
+async function errorMessage(message, error, command) {
+    let embed = new MessageEmbed()
+        .setColor('#800080');
 
-    embed.setTitle(Error.message)
-         .setDescription(message.author.username + ', Check the !help <command_name> command to more info UwU')
-         .setTimestamp()
-         .setColor('#800080');
-    
-    message.channel.send(embed);
+    if (error instanceof Error) {
+        raven.captureMessage(`Command Error: ${command.name}\n${error.stack || error}`);
+    }
+
+    if (error.message) {
+        embed.setTitle(`Sorry ${message.author.username}, I could not run this command .-.`);
+        message.channel.send(embed);
+    }
+    else {
+        embed.setTitle(`${error}`);
+        message.channel.send(embed);
+    }
 }
 
 module.exports = { errorMessage };

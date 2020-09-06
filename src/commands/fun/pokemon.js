@@ -15,9 +15,8 @@ module.exports = class Pokemon extends BaseCommand {
         let result = await fetch(`${url}/${cmdArgs.join(' ')}`);
         
         if(result.status != 200) {
-            throw new Error(`No results for ${cmdArgs}`);
-        }
-        else {
+            throw `No results for ${cmdArgs}`;
+        } else {
             let pokemon = await result.json();
 
             msg.edit({ embed: {

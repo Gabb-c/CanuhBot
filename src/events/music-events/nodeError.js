@@ -1,4 +1,4 @@
-const BaseEvent = require('../utils/structures/BaseEvent');
+const BaseEvent = require('../../utils/structures/BaseEvent');
 const boxen = require('boxen');
 
 module.exports = class NodeError extends BaseEvent {

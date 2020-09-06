@@ -22,7 +22,7 @@ module.exports = class Urban extends BaseCommand {
         const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
   
         if(!list.length) {
-            throw new Error(`No results for "${cmdArgs.join(' ')}"`);
+            throw `No results for "${cmdArgs.join(' ')}"`;
         } else {
             msg.edit({ embed: {
                 title: `${list[0].word}`,

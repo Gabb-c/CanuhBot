@@ -10,10 +10,8 @@ module.exports = class Cuddle extends BaseCommand {
     }
 
     async run(client, message, cmdArgs) {
-
-        if (!message.mentions.users.first()) {
-            throw new Error("You need to mention someone to cuddle . . .");
-        }
+        
+        if (!message.mentions.users.first()) throw 'You need to mention someone to cuddle . . .';
         if (message.mentions.users.first().id == client.user.id && message.author.id !== process.env.BOT_OWNER_ID) return message.reply("No cuddle unless you're my Dev !");
         if (message.mentions.users.first().id == message.author.id) return message.reply(" W T F  ? !");
         if (message.mentions.users.first().id == client.user.id && message.author.id == process.env.BOT_OWNER_ID) return message.reply("B-Baka! >///<");
