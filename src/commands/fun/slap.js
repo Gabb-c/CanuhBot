@@ -6,12 +6,12 @@ require('dotenv').config();
 
 module.exports = class Slap extends BaseCommand{
     constructor(){
-        super('slap', 'fun', true, 'Slaps the mentioned person!', `${process.env.BOT_PREFIX}slap  < mention >`);
+        super('slap', 'fun', true, 'Slaps the mentioned person!', `${process.env.BOT_PREFIX}slap  < mention >`, 5);
     }
 
     async run(client, message, cmdArgs) {
 
-        if(!message.mentions.users.first()) throw 'You need to mention someone to slap . . .';
+        if(!message.mentions.users.first()) throw `${message.author.username}, You need to mention someone to slap . . .`;
         if (message.mentions.users.first().id == message.author.id) return message.reply(" are you ok ?");
         if (message.mentions.users.first().id == client.user.id) return message.reply(" yare yare daze . . . ゴ ゴ ゴ ゴ ゴ");
 

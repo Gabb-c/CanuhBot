@@ -9,7 +9,7 @@ async function registerCommands(client, dir = '') {
 
     for (const file of files) {
         const stat = await fs.lstat(path.join(filePath, file));
-        if (stat.isDirectory()) { registerCommands(client, path.join(dir, file)); }
+        if (stat.isDirectory()) registerCommands(client, path.join(dir, file));
         if (file.endsWith('.js')) {
             const Command = require(path.join(filePath, file));
             
@@ -70,7 +70,6 @@ async function registerProcessEvents(dir = '') {
             if (Event.prototype instanceof BaseEvent) {
                 const event = new Event();
                 process.on(event.name, event.run.bind(event));
-                process.events.set(event.name, event);
             }
         }
     }

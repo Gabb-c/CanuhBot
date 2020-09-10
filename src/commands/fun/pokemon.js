@@ -5,7 +5,7 @@ require('dotenv').config();
 module.exports = class Pokemon extends BaseCommand {
 
     constructor() {
-        super('pokemon', 'fun', true, 'Shows information of a pokemon', `${process.env.BOT_PREFIX}pokemon  < pokemon_name >`);
+        super('pokemon', 'fun', true, 'Shows information of a pokemon', `${process.env.BOT_PREFIX}pokemon  < pokemon_name >`, 5);
     }
 
     async run(client, message, cmdArgs) {
@@ -15,7 +15,7 @@ module.exports = class Pokemon extends BaseCommand {
         let result = await fetch(`${url}/${cmdArgs.join(' ')}`);
         
         if(result.status != 200) {
-            throw `No results for ${cmdArgs}`;
+            throw `${message.author.username}, no results for "${cmdArgs}"`;
         } else {
             let pokemon = await result.json();
 

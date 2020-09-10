@@ -6,12 +6,12 @@ require('dotenv').config();
 
 module.exports = class Feed extends BaseCommand {
     constructor () {
-        super('feed', 'fun', true, 'Feeds the mentioned person', `${process.env.BOT_PREFIX}feed  < mention >`);
+        super('feed', 'fun', true, 'Feeds the mentioned person', `${process.env.BOT_PREFIX}feed  < mention >`, 5);
     }
 
     async run(client, message) {
     
-        if (!message.mentions.users.first()) throw 'You need to mention someone to feed . . .';
+        if (!message.mentions.users.first()) throw `${message.author.username}, You need to mention someone to feed . . .`;
         if (message.mentions.users.first().id == client.user.id && message.author.id !== process.env.BOT_OWNER_ID) return message.reply("Only my Dev can do this !");
         if (message.mentions.users.first().id == message.author.id) return message.reply(" feed your best friend and dont be shy :3");
         if (message.mentions.users.first().id == client.user.id && message.author.id == process.env.BOT_OWNER_ID) return message.reply("B-Baka! >///<");

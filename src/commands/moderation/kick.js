@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = class Kick extends BaseCommand {
     constructor () {
-        super('kick', 'moderation', true, 'Kicks the mentioned person!', `${process.env.BOT_PREFIX}kick  < mention >`);
+        super('kick', 'moderation', true, 'Kicks the mentioned person!', `${process.env.BOT_PREFIX}kick  < mention >`, 5);
     }
 
     async run(client, message, cmdArgs) {

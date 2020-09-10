@@ -1,5 +1,5 @@
 {
-  "name": "discordjs",
+  "name": "canuh-bot",
   "version": "1.0.0",
   "description": "",
   "main": "bot.js",
@@ -8,7 +8,7 @@
     "start": "nodemon ./src/bot.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gabb-c",
   "license": "ISC",
   "dependencies": {
     "boxen": "^4.2.0",

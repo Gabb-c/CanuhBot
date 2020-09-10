@@ -4,7 +4,7 @@ require('dotenv').config();
 
 module.exports = class help extends BaseCommand {
     constructor(){
-        super('help', 'info', false, 'Shows information about the bot fuctionalities!', `${process.env.BOT_PREFIX}help < command_name >`);
+        super('help', 'info', false, 'Shows information about the bot fuctionalities!', `${process.env.BOT_PREFIX}help < command_name >`, 5);
     }
 
     async run(client, message, cmdArgs) {
@@ -13,8 +13,8 @@ module.exports = class help extends BaseCommand {
 
         if(command) {
             embed.setTitle(`📌  ${command.name.toUpperCase()}  📌`)
-                 .setDescription('DESCRIPTION: ' + command.description + '\n' +
-                                 'STRUCTURE: '   + command.structure           )
+                 .setDescription("`" + command.description + "`\n" 
+                                 + "`" + command.structure + "`")
                  .setColor('#800080')
                  .setTimestamp()
                  .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL());

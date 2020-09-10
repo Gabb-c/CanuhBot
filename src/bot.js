@@ -29,7 +29,6 @@ raven.config(process.env.SENTRY_KEY, {
 
 (async () => {
     client.commands = new Map;
-    process.events = new Map;
     await registerCommands(client, '../commands');
     await registerDiscordEvents(client, '../events/discord-events');
     await registerProcessEvents('../events/process');

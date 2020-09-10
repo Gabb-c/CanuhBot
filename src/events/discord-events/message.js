@@ -26,7 +26,7 @@ module.exports = class MesssageEvent extends BaseEvent {
 
             } else if(cmdArgs == '' && command.args) {
                 await noArgs(message);
-
+            
             } else if (command) {
                 command.run(client, message, cmdArgs)
                        .catch(err => errorMessage(message, err, command));

@@ -9,34 +9,46 @@ module.exports = class Urban extends BaseCommand {
 
     constructor() {
 
-        super('urban', 'info', true, 'A search on Urban Dictionary', `${process.env.BOT_PREFIX}urban  < word >`);
+        super('urban', 'info', true, 'A search on Urban Dictionary', `${process.env.BOT_PREFIX}urban  < word >`, 5);
     
     }
 
     async run(client, message, cmdArgs) {
 
         let msg =  await message.channel.send("Searching . . . 🔎");
-
-        const query = querystring.stringify({ term: cmdArgs.join(' ') });
-
-        const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
-  
-        if(!list.length) {
-            throw `No results for "${cmdArgs.join(' ')}"`;
-        } else {
+        
+        const info = await this.getDefinition(cmdArgs.join(' '));
+        
             msg.edit({ embed: {
-                title: `${list[0].word}`,
+                title: `${info.word}`,
+                description: info.definition,
                 fields: [
-                    { name: 'Definition: ', value: `${list[0].definition}` },
-                    { name: 'Examples: ', value: `${list[0].example}` },
-                    { name: 'Rating: ', value: `${list[0].thumbs_up} thumbs up \n ${list[0].thumbs_down} thumbs down` }
+                    { name: 'Examples: ', value: `${info.example}` },
+                    { name: 'Rating: ', value: `${info.thumbsUp} thumbs up \n ${info.thumbsDown} thumbs down` }
                 ],
                 footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
                 thumbnail: { url: 'http://i.imgur.com/CcIZZsa.png' },
                 timestamp: new Date(),
                 color: '#800080'
             }});
-        }
     }
 
+    async getDefinition(term) {
+        const query = querystring.stringify({ term: term });
+
+        const { list: [word] } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
+
+        if(!word) throw `No results for "${term}"`;
+
+        return {
+            definition: word.definition.length >= 1984 ? `${word.definition.substr(0, 1984)}...` : word.definition,
+            word: word.word,
+            link: word.permalink,
+            thumbsUp: word.thumbs_up,
+            thumbsDown: word.thumbs_down,
+            example: word.example,
+            author: word.author
+        };
+
+    }
 }

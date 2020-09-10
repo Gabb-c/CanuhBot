@@ -6,12 +6,12 @@ require('dotenv').config();
 
 module.exports = class Kiss extends BaseCommand {
     constructor () {
-        super('kiss', 'fun', true, 'Kiss the mentioned person', `${process.env.BOT_PREFIX}kiss  < mention >`);
+        super('kiss', 'fun', true, 'Kiss the mentioned person', `${process.env.BOT_PREFIX}kiss  < mention >`, 5);
     }
 
     async run(client, message) {
     
-        if (!message.mentions.users.first()) throw 'You need to mention someone to kiss . . .';
+        if (!message.mentions.users.first()) throw `${message.author.username}, You need to mention someone to kiss . . .`;
         if (message.mentions.users.first().id == client.user.id && message.author.id !== process.env.BOT_OWNER_ID) return message.reply("No kissing unless you're my Dev !");
         if (message.mentions.users.first().id == message.author.id) return message.reply(" W T F  ? !");
         if (message.mentions.users.first().id == client.user.id && message.author.id == process.env.BOT_OWNER_ID) return message.reply("B-Baka! >///<");
