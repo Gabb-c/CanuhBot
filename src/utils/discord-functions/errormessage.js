@@ -1,5 +1,4 @@
 const { MessageEmbed } = require('discord.js');
-const boxen = require('boxen');
 const raven = require('raven');
 
 async function errorMessage(message, error, command) {

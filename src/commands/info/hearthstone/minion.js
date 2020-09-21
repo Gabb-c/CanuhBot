@@ -44,27 +44,27 @@ module.exports = class WeaponCard extends BaseCommand {
                     "`Attack 🗡️: " + element.attack + "`",
                     "`Health ♥: " + element.health + "`",
                     "`Card Set 🏷️: " + element.cardSet + "`",
-                    "`Faction 🔖: " + element.faction + "`",
-                    "`Rarity ⭐: " + element.rarity + "`"
+                    "`Faction 🔖: " + (typeof element.faction === 'undefined' ? 'None' : element.faction) + "`",
+                    "`Rarity ⭐: " + (typeof element.rarity === 'undefined' ? 'None' : element.rarity) + "`"
                 ].join('\n')
                 , true);
             });
 
-            await message.channel.send(embed).then(() => {
+            await message.channel.send(embed);
 
-                message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] }).then(collected => {
+                message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] }).then(async collected => {
                         const entry = collected.first().content;
                         const choice = card[entry-1];
                         let cardEmbed = new MessageEmbed()
                            .setTitle(`${choice.name},   ${choice.cardId}`)
-                           .setDescription(choice.flavor)
+                           .setDescription(typeof choice.flavor === 'undefined' ? '' : choice.flavor)
                            .addField('Stats', [
                                 "`Cost 💎: " + choice.cost + "`",
                                 "`Attack 🗡️: " + choice.attack + "`",
                                 "`Health ♥: " + choice.health + "`",
                                 "`Card Set 🏷️: " + choice.cardSet + "`",
-                                "`Faction 🔖: " + choice.faction + "`",
-                                "`Rarity ⭐: " + choice.rarity + "`"
+                                "`Faction 🔖: " + (typeof choice.faction === 'undefined' ? 'None' : choice.faction) + "`",
+                                "`Rarity ⭐: " + (typeof choice.rarity === 'undefined' ? 'None' : choice.rarity) + "`"
                             ].join('\n')
                             , true)
                            .setImage(`${process.env.HS_IMG_API}${choice.cardId}.png`)
@@ -75,8 +75,6 @@ module.exports = class WeaponCard extends BaseCommand {
                 }).catch(err => {
                     message.channel.send(`${message.author.username}, time's over . . .`);
                 });
-                
-            });
 
         } else {
             embed.setTitle(`${card[0].name},   ${card[0].cardId}`)
@@ -86,10 +84,10 @@ module.exports = class WeaponCard extends BaseCommand {
                     "`Attack 🗡️: " + card[0].attack + "`",
                     "`Health ♥: " + card[0].health + "`",
                     "`Card Set 🏷️: " + card[0].cardSet + "`",
-                    "`Faction 🔖: " + card[0].faction + "`",
-                    "`Rarity ⭐: " + card[0].rarity + "`"
+                    "`Faction 🔖: " + (typeof card[0].faction === 'undefined' ? 'None' : card[0].faction) + "`",
+                    "`Rarity ⭐: " + (typeof card[0].rarity === 'undefined' ? 'None' : card[0].rarity) + "`"
                 ].join('\n'), true)
-                    .setDescription(card[0].flavor);
+                    .setDescription(typeof card[0].flavor === 'undefined' ? '' : card[0].flavor);
             message.channel.send(embed);
         }
     }

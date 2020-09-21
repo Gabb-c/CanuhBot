@@ -12,12 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "boxen": "^4.2.0",
-    "discord.js": "^12.2.0",
+    "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "erela.js": "^1.1.8",
     "nekos.life": "^2.0.7",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "nodemon": "^2.0.4",
-    "raven": "^2.6.4"
+    "raven": "^2.6.4",
+    "twisted": "^1.28.0"
   }
 }

@@ -1,9 +1,9 @@
 require('dotenv').config();
 const BaseEvent = require('../../utils/structures/BaseEvent')
 const boxen = require('boxen');
-const { noArgs } = require('../../utils/noargs');
-const { errorMessage } = require('../../utils/errormessage');
-const { commandNotFound } = require('../../utils/commandnotfound');
+const { noArgs } = require('../../utils/discord-functions/noargs');
+const { errorMessage } = require('../../utils/discord-functions/errormessage');
+const { commandNotFound } = require('../../utils/discord-functions/commandnotfound');
 
 module.exports = class MesssageEvent extends BaseEvent {
     constructor () {

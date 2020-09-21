@@ -9,7 +9,7 @@ const {
     registerDiscordEvents,
     registerMusicEvents,
     registerProcessEvents
-} = require('./utils/register');
+} = require('./utils/discord-functions/register');
 
 raven.config(process.env.SENTRY_KEY, {
     captureUnhandledRejections: true
@@ -24,13 +24,13 @@ raven.config(process.env.SENTRY_KEY, {
             password: process.env.PASSWORD
         }
     ]);
-    await registerMusicEvents(client.music, '../events/music-events');
+    await registerMusicEvents(client.music, '../../events/music-events');
 })();
 
 (async () => {
     client.commands = new Map;
-    await registerCommands(client, '../commands');
-    await registerDiscordEvents(client, '../events/discord-events');
-    await registerProcessEvents('../events/process');
+    await registerCommands(client, '../../commands');
+    await registerDiscordEvents(client, '../../events/discord-events');
+    await registerProcessEvents('../../events/process');
 })();
 
