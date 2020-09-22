@@ -33,7 +33,7 @@ module.exports = class Status extends BaseCommand {
             const status = await getStatusByShard(choice.cod);
 
             let msg = new MessageEmbed()
-                .setTitle(`${choice.name}  ${choice.flag},  ${choice.cod}`)
+                .setTitle(`${choice.name}  ${choice.flag}  ${choice.cod}`)
                 .setDescription([
                     status.services.map(s => `\`${s.name}:  ${s.status}\``).join('\n')
                 ])

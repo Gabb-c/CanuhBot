@@ -38,7 +38,7 @@ module.exports = class WeaponCard extends BaseCommand {
             embed.setTitle(`Results for ${cmdArgs.join(' ')}`);
 
             card.forEach((element, key) => {
-                embed.addField(`${key + 1}) ${element.name},  ${element.cardId}`, [
+                embed.addField(`${key + 1}) ${element.name} | ${element.cardId}`, [
                     "`Cost 💎: " + element.cost + "`",
                     "`Health ♥: " + element.health + "`",
                     "`Armor 🛡️: " + element.armor + "`",
@@ -56,7 +56,7 @@ module.exports = class WeaponCard extends BaseCommand {
                         const entry = collected.first().content;
                         const choice = card[entry-1];
                         let cardEmbed = new MessageEmbed()
-                           .setTitle(`${choice.name},   ${choice.cardId}`)
+                           .setTitle(`${choice.name} | ${choice.cardId}`)
                            .setDescription(choice.flavor)
                            .addField('Stats', [
                                 "`Cost 💎: " + choice.cost + "`",
@@ -79,7 +79,7 @@ module.exports = class WeaponCard extends BaseCommand {
             });
 
         } else {
-            embed.setTitle(`${card[0].name},   ${card[0].cardId}`)
+            embed.setTitle(`${card[0].name} | ${card[0].cardId}`)
                  .setImage(`${process.env.HS_IMG_API}${card[0].cardId}.png`)
                  .setDescription(card[0].flavor)
                  .addField('Stats', [

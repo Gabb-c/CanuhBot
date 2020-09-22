@@ -28,7 +28,7 @@ module.exports = class WeaponCard extends BaseCommand {
             return element.type === 'Minion';
         });
 
-        if(card.length == '') throw `${message.author.username}, this command is only for weapon cards . . .`;
+        if(card.length == '') throw `${message.author.username}, this command is only for minion cards . . .`;
 
         let embed = new MessageEmbed()
             .setColor('#800080')
@@ -39,7 +39,7 @@ module.exports = class WeaponCard extends BaseCommand {
             embed.setTitle(`Results for ${cmdArgs.join(' ')}`);
 
             card.forEach((element, key) => {
-                embed.addField(`${key + 1}) ${element.name},  ${element.cardId}`, [
+                embed.addField(`${key + 1}) ${element.name} | ${element.cardId}`, [
                     "`Cost 💎: " + element.cost + "`",
                     "`Attack 🗡️: " + element.attack + "`",
                     "`Health ♥: " + element.health + "`",
@@ -56,7 +56,7 @@ module.exports = class WeaponCard extends BaseCommand {
                         const entry = collected.first().content;
                         const choice = card[entry-1];
                         let cardEmbed = new MessageEmbed()
-                           .setTitle(`${choice.name},   ${choice.cardId}`)
+                           .setTitle(`${choice.name} | ${choice.cardId}`)
                            .setDescription(typeof choice.flavor === 'undefined' ? '' : choice.flavor)
                            .addField('Stats', [
                                 "`Cost 💎: " + choice.cost + "`",
@@ -77,7 +77,7 @@ module.exports = class WeaponCard extends BaseCommand {
                 });
 
         } else {
-            embed.setTitle(`${card[0].name},   ${card[0].cardId}`)
+            embed.setTitle(`${card[0].name} | ${card[0].cardId}`)
                  .setImage(`${process.env.HS_IMG_API}${card[0].cardId}.png`)
                  embed.addField('Stats', [
                     "`Cost 💎: " + card[0].cost + "`",
