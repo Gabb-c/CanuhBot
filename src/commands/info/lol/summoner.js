@@ -33,19 +33,12 @@ module.exports = class Summoner extends BaseCommand {
             const summoner = await getSummonerByName(cmdArgs.join(' '), choice.cod);
 
             msg.edit({ embed: {
-                title: `${summoner.name},  level  ${summoner.summonerLevel}`,
-                fields: [
-                    { name: 'Solo/Duo', value: [
-                        `\`❯ ${summoner.ranked.soloDuo.tier} ${summoner.ranked.soloDuo.rank}, ${summoner.ranked.soloDuo.lp}\``,
-                        `\`❯ ✔️ ${summoner.ranked.soloDuo.wins}\``,
-                        `\`❯ ✖️ ${summoner.ranked.soloDuo.losses}\``
-                    ].join('\n')},
-                    { name: 'Flex', value: [
-                        `\`❯ ${summoner.ranked.flex.tier} ${summoner.ranked.flex.rank}, ${summoner.ranked.flex.lp}\``,
-                        `\`❯ ✔️: ${summoner.ranked.flex.wins}\``,
-                        `\`❯ ✖️: ${summoner.ranked.flex.losses}\``
-                    ].join('\n')}
-                ],
+                title: summoner.name,
+                description: [
+                    `\`Level ${summoner.summonerLevel}\``,
+                    `\`Solo/Duo ${summoner.ranked.soloDuo.tier} ${summoner.ranked.soloDuo.rank} | ${summoner.ranked.soloDuo.wins}W ${summoner.ranked.soloDuo.losses}L\``,
+                    `\`Flex ${summoner.ranked.flex.tier} ${summoner.ranked.flex.rank} | ${summoner.ranked.flex.wins}W ${summoner.ranked.flex.losses}L\``
+                ].join('\n'),
                 thumbnail: { url: summoner.profileIcon },
                 footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
                 timestamp: new Date(),
@@ -53,7 +46,7 @@ module.exports = class Summoner extends BaseCommand {
             }});
 
         }).catch(err => {
-            message.channel.send(`${message.author.username}, nothing founded . . .`);
+            message.channel.send(`${err}, nothing founded . . .`);
         });
         
     }
