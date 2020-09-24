@@ -1,8 +1,26 @@
 const { Client } = require('discord.js');
-const { ErelaClient } = require('erela.js');;
+const { Manager } = require('erela.js');
 const client = new Client;
 const raven = require('raven');
 require('dotenv').config();
+
+client.manager = new Manager({
+    nodes: [
+        {
+        host: process.env.HOST,
+        port: process.env.PORT,
+        password: process.env.PASSWORD,
+        secure: false
+        }
+],
+
+autoPlay: true,
+
+send(id, payload) {
+    const guild = client.guilds.cache.get(id);
+    if (guild) guild.shard.send(payload);
+}
+});    
 
 const {
     registerCommands,
@@ -17,14 +35,7 @@ raven.config(process.env.SENTRY_KEY, {
 
 (async () => {
     await client.login(process.env.BOT_TOKEN);
-    client.music = new ErelaClient(client, [
-        {
-            host: process.env.HOST,
-            port: process.env.PORT,
-            password: process.env.PASSWORD
-        }
-    ]);
-    await registerMusicEvents(client.music, '../../events/music-events');
+    await registerMusicEvents(client.manager, '../../events/music-events');
 })();
 
 (async () => {
@@ -33,4 +44,3 @@ raven.config(process.env.SENTRY_KEY, {
     await registerDiscordEvents(client, '../../events/discord-events');
     await registerProcessEvents('../../events/process');
 })();
-
