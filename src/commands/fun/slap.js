@@ -6,7 +6,7 @@ require('dotenv').config();
 
 module.exports = class Slap extends BaseCommand {
     constructor() {
-        super('slap', 'fun', true, 'Slaps the mentioned person!', `${process.env.BOT_PREFIX}slap  < mention >`, 5);
+        super('slap', 'fun', true, 'Slaps the mentioned person!', '< mention >', 5);
     }
 
     async run(client, message, cmdArgs) {

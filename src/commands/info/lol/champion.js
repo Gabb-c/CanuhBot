@@ -4,7 +4,7 @@ const { getChampionByName } = require('../../../utils/league/getChampionByName')
 
 module.exports = class Champion extends BaseCommand {
     constructor () {
-        super('champion', 'info', true, 'Shows a lol champion', `${process.env.BOT_PREFIX + Champion.name}`, 5);
+        super('champion', 'info', true, 'Shows a lol champion', '< champion >', 5);
     }
 
     async run(client, message, cmdArgs) {        

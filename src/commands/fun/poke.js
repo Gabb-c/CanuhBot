@@ -5,7 +5,7 @@ const neko = new Client();
 require('dotenv').config();
 module.exports = class Poke extends BaseCommand {
     constructor() {
-        super('poke', 'fun', true, 'Pokes the mentioned person!', `${process.env.BOT_PREFIX}poke  < mention >`, 5);
+        super('poke', 'fun', true, 'Pokes the mentioned person!', '< mention >', 5);
     }
 
     async run(client, message, cmdArgs) {

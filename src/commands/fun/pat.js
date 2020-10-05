@@ -5,7 +5,7 @@ const { MessageEmbed } = require('discord.js');
 require('dotenv').config();
 module.exports = class Pat extends BaseCommand {
     constructor() {
-        super('pat', 'fun', true, 'Pats someone!', `${process.env.BOT_PREFIX}pat  < mention >`, 5);
+        super('pat', 'fun', true, 'Pats someone!', '< mention >', 5);
     }
 
     async run(client, message, cmdArgs) {

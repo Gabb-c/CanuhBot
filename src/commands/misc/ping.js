@@ -4,7 +4,7 @@ require('dotenv').config();
 
 module.exports = class ping extends BaseCommand {
     constructor() {
-        super('ping', 'info', false, 'Shows the ping of the bot in ms!', `${process.env.BOT_PREFIX}ping`, 5);
+        super('ping', 'info', false, 'Shows the ping of the bot in ms!', '', 5);
     }
 
     async run(client, message) {

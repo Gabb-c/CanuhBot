@@ -6,7 +6,7 @@ require('dotenv').config();
 
 module.exports = class Baka extends BaseCommand {
     constructor() {
-        super('baka', 'fun', false, 'Baka baka baka', `${process.env.BOT_PREFIX}baka`, 5);
+        super('baka', 'fun', false, 'Baka baka baka', '', 5);
     }
 
     async run(client, message, cmdArgs) {

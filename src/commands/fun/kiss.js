@@ -6,7 +6,7 @@ require('dotenv').config();
 
 module.exports = class Kiss extends BaseCommand {
     constructor() {
-        super('kiss', 'fun', true, 'Kiss the mentioned person', `${process.env.BOT_PREFIX}kiss  < mention >`, 5);
+        super('kiss', 'fun', true, 'Kiss the mentioned person', '< mention >', 5);
     }
 
     async run(client, message) {

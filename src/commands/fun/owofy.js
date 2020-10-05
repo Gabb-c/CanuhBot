@@ -6,7 +6,7 @@ require('dotenv').config();
 
 module.exports = class Owofy extends BaseCommand {
     constructor() {
-        super('owofy', 'fun', true, 'owofies the message', `${process.env.BOT_PREFIX}owofy  < message >`, 5);
+        super('owofy', 'fun', true, 'owofies the message', '< message >', 5);
     }
 
     async run(client, message, cmdArgs) {

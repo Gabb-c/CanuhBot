@@ -6,7 +6,7 @@ require('dotenv').config();
 
 module.exports = class Cuddle extends BaseCommand {
     constructor() {
-        super('cuddle', 'fun', true, 'Cuddles the mentioned person', `${process.env.BOT_PREFIX}cuddle  < mention >`, 5);
+        super('cuddle', 'fun', true, 'Cuddles the mentioned person', '< mention >', 5);
     }
 
     async run(client, message, cmdArgs) {

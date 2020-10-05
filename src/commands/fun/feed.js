@@ -6,7 +6,7 @@ require('dotenv').config();
 
 module.exports = class Feed extends BaseCommand {
     constructor() {
-        super('feed', 'fun', true, 'Feeds the mentioned person', `${process.env.BOT_PREFIX}feed  < mention >`, 5);
+        super('feed', 'fun', true, 'Feeds the mentioned person', '< mention >', 5);
     }
 
     async run(client, message) {

@@ -9,7 +9,7 @@ module.exports = class help extends BaseCommand {
       'info',
       false,
       'Shows information about the bot fuctionalities!',
-      `${process.env.BOT_PREFIX}help < command_name >`,
+      '< command_name >',
       5
     );
   }
@@ -33,7 +33,7 @@ module.exports = class help extends BaseCommand {
           title: command.name.toUpperCase(),
           description: [
             `${command.description}`,
-            `\`${command.structure}\``,
+            `\`${process.env.BOT_PREFIX + command.name} ${command.structure}\``,
           ].join('\n'),
           footer: {
             text: 'Requested by ' + message.author.username,
@@ -79,7 +79,7 @@ module.exports = class help extends BaseCommand {
         choiceCmds.forEach(c => {
 
           embed.addField(c.name.toUpperCase(), [
-            `${c.description} \n ${c.structure}`
+            `${c.description} \n ${process.env.BOT_PREFIX + c.name} ${c.structure}`
           ].join('\n'), true)
 
         });

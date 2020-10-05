@@ -6,7 +6,7 @@ require('dotenv').config();
 
 module.exports = class Hug extends BaseCommand {
     constructor() {
-        super('hug', 'fun', true, 'Hugs the mentioned person', `${process.env.BOT_PREFIX}hug  < mention >`, 5);
+        super('hug', 'fun', true, 'Hugs the mentioned person', '< mention >', 5);
     }
 
     async run(client, message, cmdArgs) {

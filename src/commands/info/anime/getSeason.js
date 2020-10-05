@@ -7,7 +7,7 @@ const types = require('../../../utils/weeb/types');
 
 module.exports = class Season extends BaseCommand {
     constructor() {
-        super('season', 'info', true, 'Shows the animes of the season', `${process.env.BOT_TOKEN + Season.name} < year >`, 5);
+        super('season', 'info', true, 'Shows the animes of the season', `< year >`, 5);
     }
 
     async run(client, message, cmdArgs) {

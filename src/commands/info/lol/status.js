@@ -7,7 +7,7 @@ const regions = require('../../../utils/league/regions');
 
 module.exports = class Status extends BaseCommand {
     constructor() {
-        super('status', 'info', false, 'Shows information of the league servers', `${process.env.BOT_PREFIX + Status.name}`, 5);
+        super('status', 'info', false, 'Shows information of the league servers', '', 5);
     }
 
     async run(client, message, cmdArgs) {

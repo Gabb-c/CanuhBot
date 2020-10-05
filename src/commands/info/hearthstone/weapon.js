@@ -5,7 +5,7 @@ require('dotenv').config();
 
 module.exports = class WeaponCard extends BaseCommand {
     constructor () {
-        super('hsweapon', 'info', true, 'Shows information of a Hearthstone weapon card!', `${process.env.BOT_PREFIX}hsweapon < card_name >`, 5);
+        super('hsweapon', 'info', true, 'Shows information of a Hearthstone weapon card!', '< card_name >', 5);
     }
 
     async run(client, message, cmdArgs) {

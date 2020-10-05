@@ -8,7 +8,7 @@ module.exports = class Urban extends BaseCommand {
 
     constructor() {
 
-        super('urban', 'info', true, 'A search on Urban Dictionary', `${process.env.BOT_PREFIX}urban  < word >`, 5);
+        super('urban', 'info', true, 'A search on Urban Dictionary', '< word >', 5);
 
     }
 

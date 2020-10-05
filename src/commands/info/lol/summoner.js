@@ -6,7 +6,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = class Summoner extends BaseCommand {
     constructor() {
-        super('summoner', 'info', true, 'Shows a lol summoner account', `${process.env.BOT_PREFIX + Summoner.name}`, 5);
+        super('summoner', 'info', true, 'Shows a lol summoner account', `< nickname >`, 5);
     }
 
     async run(client, message, cmdArgs) {

@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = class Play extends BaseCommand {
     constructor() {
-        super('play', 'music', true, 'Play some music!', `${process.env.BOT_PREFIX}play  < music_name >`, 5);
+        super('play', 'music', true, 'Play some music!', '< music_name >', 5);
     }
 
     async run(client, message, cmdArgs) {

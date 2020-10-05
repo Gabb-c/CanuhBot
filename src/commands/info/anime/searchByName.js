@@ -4,7 +4,7 @@ const search = require('mal-scraper').search;
 
 module.exports = class AnimeByName extends BaseCommand {
     constructor() {
-        super('anime', 'info', true, 'Shows info of an anime', `${process.env.BOT_PREFIX + AnimeByName.name} < name >`, 5);
+        super('anime', 'info', true, 'Shows info of an anime', '< name >', 5);
     }
 
     async run(client, message, cmdArgs) {
@@ -50,4 +50,6 @@ module.exports = class AnimeByName extends BaseCommand {
             message.channel.send(`${message.author.username}, time's over . . .`);
         });
     }
+
+    async getName() { return this.name }
 }

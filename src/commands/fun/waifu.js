@@ -6,7 +6,7 @@ require('dotenv').config();
 
 module.exports = class Waifu extends BaseCommand {
     constructor() {
-        super('waifu', 'fun', false, 'Gets a waifu for yourself', `${process.env.BOT_PREFIX}waifu`, 5);
+        super('waifu', 'fun', false, 'Gets a waifu for yourself', '', 5);
     }
 
     async run(client, message) {

@@ -5,7 +5,7 @@ require('dotenv').config();
 module.exports = class Pokemon extends BaseCommand {
 
     constructor() {
-        super('pokemon', 'fun', true, 'Shows information of a pokemon', `${process.env.BOT_PREFIX}pokemon  < name >`, 5);
+        super('pokemon', 'fun', true, 'Shows information of a pokemon', '< name >', 5);
     }
 
     async run(client, message, cmdArgs) {

@@ -3,9 +3,9 @@ const { MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
 require('dotenv').config();
 
-module.exports = class WeaponCard extends BaseCommand {
+module.exports = class MinionCard extends BaseCommand {
     constructor () {
-        super('hsminion', 'info', true, 'Shows information of a Hearthstone minion card!', `${process.env.BOT_PREFIX}hsminion < card_name >`, 5);
+        super('hsminion', 'info', true, 'Shows information of a Hearthstone minion card!', '< card_name >', 5);
     }
 
     async run(client, message, cmdArgs) {

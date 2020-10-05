@@ -3,7 +3,7 @@ require('dotenv').config();
 const { MessageEmbed } = require('discord.js');
 module.exports = class Ban extends BaseCommand {
     constructor () {
-        super('ban', 'moderation', true, 'Bans the mentioned person!', `${process.env.BOT_PREFIX}ban  < mention >`, 5);
+        super('ban', 'moderation', true, 'Bans the mentioned person!', '< mention >', 5);
     }
 
     async run(client, message, cmdArgs) {
