@@ -1,16 +1,13 @@
-const fetch = require('node-fetch');
+const { LolApi } = require('twisted');
+const api = new LolApi();
 
 async function getVersion() {
-
-    const list = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(response => response.json())
-                                                                                     .catch(err => { throw 'Cannot get LOL API version . . .' })
-    
-    return {
-        latest: list[0],
-        full: list
-    }
-    
-
+  const list = await api.DataDragon.getVersions().catch(() => { throw `Could not get Lol API versions . . .` })
+  
+  return {
+    latest: list[0],
+    full: list,
+  };
 }
 
 module.exports = { getVersion };

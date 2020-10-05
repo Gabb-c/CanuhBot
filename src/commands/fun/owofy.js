@@ -5,20 +5,22 @@ const neko = new Client();
 require('dotenv').config();
 
 module.exports = class Owofy extends BaseCommand {
-    constructor () {
+    constructor() {
         super('owofy', 'fun', true, 'owofies the message', `${process.env.BOT_PREFIX}owofy  < message >`, 5);
     }
 
     async run(client, message, cmdArgs) {
 
-        if(message.content.length > 200) throw `${message.author.username}, Your message is too long . . .`;
-        
-        let embed = new MessageEmbed()
-             .setTitle("🐱  " + await (await (await neko.sfw.OwOify({ text: cmdArgs.join(' ') })).owo) + "  🐱")
-             .setColor('#800080')
-             .setFooter(`OwOfyed by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
-             .setTimestamp();
-        message.channel.send(embed);
+        if (message.content.length > 500) throw `${message.author.username}, Your message is too long . . .`;
 
+        const text = await neko.sfw.OwOify({ text: cmdArgs.join(' ') }).catch(() => { throw `Sorry ${message.author.username}, I could not owofy this text . . .` });
+
+        let embed = new MessageEmbed()
+            .setTitle("🐱 OwO 🐱")
+            .setDescription(text.owo)
+            .setColor('#800080')
+            .setFooter(`OwOfyed by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
+            .setTimestamp();
+        await message.channel.send(embed);
     }
 }

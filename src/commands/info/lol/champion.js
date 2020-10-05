@@ -9,6 +9,7 @@ module.exports = class Champion extends BaseCommand {
 
     async run(client, message, cmdArgs) {        
         let msg = await message.channel.send('Searching . . . 🔎');
+        
         const data = await getChampionByName(cmdArgs.join(' '));
 
         await msg.edit( { embed: {

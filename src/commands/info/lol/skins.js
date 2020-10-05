@@ -5,7 +5,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = class Skin extends BaseCommand {
     constructor() {
-        super('skin', 'info', true, 'Shows a list of skins for a champion', `${process.env.BOT_PREFIX + Skin.name}`, 5);
+        super('skin', 'info', true, 'Shows a list of skins for a champion', `${process.env.BOT_PREFIX + Skin.name} < champion >`, 5);
     }
 
     async run(client, message, cmdArgs) {

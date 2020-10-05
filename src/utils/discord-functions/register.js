@@ -4,80 +4,81 @@ const BaseEvent = require('../../utils/structures/BaseEvent');
 const BaseCommand = require('../../utils/structures/BaseCommand');
 
 async function registerCommands(client, dir = '') {
-    const filePath = path.join(__dirname, dir);
-    const files = await fs.readdir(filePath);
+  const filePath = path.join(__dirname, dir);
+  const files = await fs.readdir(filePath);
 
-    for (const file of files) {
-        const stat = await fs.lstat(path.join(filePath, file));
-        if (stat.isDirectory()) registerCommands(client, path.join(dir, file));
-        if (file.endsWith('.js')) {
-            const Command = require(path.join(filePath, file));
-            
-            if (Command.prototype instanceof BaseCommand) {
-                const command = new Command();
-                client.commands.set(command.name, command);
-            }
-        }
+  for (const file of files) {
+    const stat = await fs.lstat(path.join(filePath, file));
+    if (stat.isDirectory()) registerCommands(client, path.join(dir, file));
+    if (file.endsWith('.js')) {
+      const Command = require(path.join(filePath, file));
+
+      if (Command.prototype instanceof BaseCommand) {
+        const command = new Command();
+        await client.commands.set(command.name, command);
+      }
     }
+  }
 }
 
 async function registerDiscordEvents(client, dir = '') {
-    const filePath = path.join(__dirname, dir);
-    const files = await fs.readdir(filePath);
+  const filePath = path.join(__dirname, dir);
+  const files = await fs.readdir(filePath);
 
-    for (const file of files) {
-        const stat = await fs.lstat(path.join(filePath, file));
-        if (stat.isDirectory()) registerDiscordEvents(client, path.join(dir, file));
-        if (file.endsWith('.js')) {
-            const Event = require(path.join(filePath, file));
-            
-            if (Event.prototype instanceof BaseEvent) {
-                const event = new Event();
-                client.on(event.name, event.run.bind(event, client));
-            }
-        }
+  for (const file of files) {
+    const stat = await fs.lstat(path.join(filePath, file));
+    if (stat.isDirectory()) registerDiscordEvents(client, path.join(dir, file));
+    if (file.endsWith('.js')) {
+      const Event = require(path.join(filePath, file));
+
+      if (Event.prototype instanceof BaseEvent) {
+        const event = new Event();
+        client.on(event.name, event.run.bind(event, client));
+      }
     }
+  }
 }
 
 async function registerMusicEvents(client, dir = '') {
-    const filePath = path.join(__dirname, dir);
-    const files = await fs.readdir(filePath);
+  const filePath = path.join(__dirname, dir);
+  const files = await fs.readdir(filePath);
 
-    for (const file of files) {
-        const stat = await fs.lstat(path.join(filePath, file));
-        if (stat.isDirectory()) registerMusicEvents(client, path.join(dir, file));
-        if (file.endsWith('.js')) {
-            const Event = require(path.join(filePath, file));
-            
-            if (Event.prototype instanceof BaseEvent) {
-                const event = new Event();
-                client.on(event.name, event.run.bind(event, client));
-            }
-        }
+  for (const file of files) {
+    const stat = await fs.lstat(path.join(filePath, file));
+    if (stat.isDirectory()) registerMusicEvents(client, path.join(dir, file));
+    if (file.endsWith('.js')) {
+      const Event = require(path.join(filePath, file));
+
+      if (Event.prototype instanceof BaseEvent) {
+        const event = new Event();
+        client.on(event.name, event.run.bind(event, client));
+      }
     }
+  }
 }
 
 async function registerProcessEvents(dir = '') {
-    const filePath = path.join(__dirname, dir);
-    const files = await fs.readdir(filePath);
+  const filePath = path.join(__dirname, dir);
+  const files = await fs.readdir(filePath);
 
-    for (const file of files) {
-        const stat = await fs.lstat(path.join(filePath, file));
-        if (stat.isDirectory()) registerProcessEvents(process, path.join(dir, file));
-        if (file.endsWith('.js')) {
-            const Event = require(path.join(filePath, file));
-            
-            if (Event.prototype instanceof BaseEvent) {
-                const event = new Event();
-                process.on(event.name, event.run.bind(event));
-            }
-        }
+  for (const file of files) {
+    const stat = await fs.lstat(path.join(filePath, file));
+    if (stat.isDirectory())
+      registerProcessEvents(process, path.join(dir, file));
+    if (file.endsWith('.js')) {
+      const Event = require(path.join(filePath, file));
+
+      if (Event.prototype instanceof BaseEvent) {
+        const event = new Event();
+        process.on(event.name, event.run.bind(event));
+      }
     }
+  }
 }
 
 module.exports = {
-    registerDiscordEvents,
-    registerCommands,
-    registerMusicEvents,
-    registerProcessEvents
+  registerDiscordEvents,
+  registerCommands,
+  registerMusicEvents,
+  registerProcessEvents,
 };

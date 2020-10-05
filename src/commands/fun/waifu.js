@@ -5,21 +5,19 @@ const neko = new Client();
 require('dotenv').config();
 
 module.exports = class Waifu extends BaseCommand {
-    constructor () {
+    constructor() {
         super('waifu', 'fun', false, 'Gets a waifu for yourself', `${process.env.BOT_PREFIX}waifu`, 5);
     }
 
     async run(client, message) {
+        const img = await neko.sfw.waifu().catch(() => { throw `Sorry ${message.author.username}, I could not get any image . . .` });
 
-        let embed = new MessageEmbed();
-
-        embed.setTitle(`${message.author.username}, she is your new waifu ♥`)
-             .setColor('#800080')
-             .setImage(await (await neko.sfw.waifu()).url)
-             .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
-             .setTimestamp();
-
-        message.channel.send(embed);
-
+        let embed = new MessageEmbed()
+            .setTitle(`${message.author.username}, she is your new waifu ♥`)
+            .setColor('#800080')
+            .setImage(img.url)
+            .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
+            .setTimestamp();
+        await message.channel.send(embed);
     }
 }

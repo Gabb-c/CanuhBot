@@ -10,16 +10,13 @@ module.exports = class Baka extends BaseCommand {
     }
 
     async run(client, message, cmdArgs) {
+        const img = await neko.sfw.baka().catch(() => { throw `Sorry ${message.author.username}, I could not get any image . . .` });
 
-            let embed = new MessageEmbed();
-
-            embed.setImage(await (await neko.sfw.baka()).url)
-                 .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
-                 .setTimestamp()
-                 .setColor('#800080');
-
-            message.channel.send(embed);
-
+        let embed = new MessageEmbed()
+            .setImage(img.url)
+            .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
+            .setTimestamp()
+            .setColor('#800080');
+        await message.channel.send(embed);
     }
-
 }

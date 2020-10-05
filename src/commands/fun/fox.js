@@ -5,21 +5,19 @@ const neko = new Client();
 require('dotenv').config();
 
 module.exports = class Fox extends BaseCommand {
-    constructor () {
+    constructor() {
         super('fox', 'fun', false, 'Gets a fox for yourself', `${process.env.BOT_PREFIX}fox`, 5);
     }
 
     async run(client, message) {
+        const img = await neko.sfw.foxGirl().catch(() => { throw `Sorry ${message.author.username}, I could not get any image . . .` });
 
-        let embed = new MessageEmbed();
-
-        embed.setTitle(`${message.author.username}, I knew u were a furry ♥`)
-             .setColor('#800080')
-             .setImage(await (await neko.sfw.foxGirl()).url)
-             .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
-             .setTimestamp();
-
-        message.channel.send(embed);
-
+        let embed = new MessageEmbed()
+            .setTitle(`${message.author.username}, I knew u were a furry ♥`)
+            .setColor('#800080')
+            .setImage(img.url)
+            .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
+            .setTimestamp();
+        await message.channel.send(embed);
     }
 }

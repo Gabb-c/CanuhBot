@@ -46,7 +46,7 @@ module.exports = class Summoner extends BaseCommand {
             }});
 
         }).catch(err => {
-            message.channel.send(`${err}, nothing founded . . .`);
+            message.channel.send(`${message.author.username}, nothing founded . . .`);
         });
         
     }

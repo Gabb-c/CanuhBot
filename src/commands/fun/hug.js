@@ -16,16 +16,15 @@ module.exports = class Hug extends BaseCommand {
         if (message.mentions.users.first().id == message.author.id) return message.reply(" W T F  ? !");
         if (message.mentions.users.first().id == client.user.id && message.author.id == process.env.BOT_OWNER_ID) return message.reply("B-Baka! >///<");
 
-            let embed = new MessageEmbed();
+        const img = await neko.sfw.hug().catch(() => { throw `Sorry ${message.author.username}, I could not get any image . . .` });
 
-            embed.setTitle(`${message.author.username} hugged ${message.mentions.users.first().username} ♥`)
-                 .setColor('#800080')
-                 .setImage(await (await neko.sfw.hug()).url)
-                 .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
-                 .setTimestamp();
-
-            message.channel.send(embed);
-
+        let embed = new MessageEmbed()
+            .setTitle(`${message.author.username} hugged ${message.mentions.users.first().username} ♥`)
+            .setColor('#800080')
+            .setImage(img.url)
+            .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
+            .setTimestamp();
+        await message.channel.send(embed);
     }
 
 }
