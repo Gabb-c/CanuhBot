@@ -50,6 +50,5 @@ module.exports = class AnimeByName extends BaseCommand {
             message.channel.send(`${message.author.username}, time's over . . .`);
         });
     }
-
-    async getName() { return this.name }
+    
 }
