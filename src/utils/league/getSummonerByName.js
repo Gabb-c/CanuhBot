@@ -9,13 +9,6 @@ async function getSummonerByName(nickname, region) {
     throw `No results for ${nickname} at ${region}`;
   });
 
-  const maestery = await api.Champion.masteryBySummoner(
-    player.response.id,
-    region
-  ).catch(err => {
-    throw `No results for ${nickname} at ${region}`;
-  });
-
   const ranked = await getRankedByName(player.response.id, region).catch(
     err => {
       throw `No ranked results for ${nickname} at ${region}`;
@@ -33,7 +26,6 @@ async function getSummonerByName(nickname, region) {
     accountId: player.response.accountId,
     profileIcon: iconUrl + player.response.profileIconId + '.png',
     summonerLevel: player.response.summonerLevel,
-    summonerMastery: maestery.response.slice(0, 5),
     ranked: ranked,
   };
 }

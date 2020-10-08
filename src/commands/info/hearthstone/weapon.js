@@ -52,24 +52,24 @@ module.exports = class WeaponCard extends BaseCommand {
             await message.channel.send(embed).then(() => {
 
                 message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] }).then(collected => {
-                        const entry = collected.first().content;
-                        const choice = card[entry-1];
-                        let cardEmbed = new MessageEmbed()
-                           .setTitle(`${choice.name} | ${choice.cardId}`)
-                           .setDescription(choice.flavor)
-                           .addField('Stats', [
-                                "`Cost 💎: " + choice.cost + "`",
-                                "`Attack 🗡️: " + choice.attack + "`",
-                                "`Durability 🛡️: " + choice.durability + "`",
-                                "`Class 📜: " + choice.playerClass + "`",
-                                "`Card Set 🏷️: " + choice.cardSet + "`"
-                            ].join('\n')
-                            , true)
-                           .setImage(`${process.env.HS_IMG_API}${choice.cardId}.png`)
-                           .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
-                           .setColor('#800080')
-                           .setTimestamp();
-                        message.channel.send(cardEmbed);
+                    const entry = collected.first().content;
+                    const choice = card[entry-1];
+                    let cardEmbed = new MessageEmbed()
+                       .setTitle(`${choice.name} | ${choice.cardId}`)
+                       .setDescription(typeof choice.flavor === 'undefined' ? '' : choice.flavor)
+                       .addField('Stats', [
+                            "`Cost 💎: " + choice.cost + "`",
+                            "`Attack 🗡️: " + choice.attack + "`",
+                            "`Durability 🛡️: " + choice.durability + "`",
+                            "`Class 📜: " + choice.playerClass + "`",
+                            "`Card Set 🏷️: " + choice.cardSet + "`"
+                        ].join('\n')
+                        , true)
+                       .setImage(`${process.env.HS_IMG_API}${choice.cardId}.png`)
+                       .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
+                       .setColor('#800080')
+                       .setTimestamp();
+                    message.channel.send(cardEmbed);
                 }).catch(err => {
                     message.channel.send(`${message.author.username}, time's over . . .`);
                 });
@@ -79,7 +79,7 @@ module.exports = class WeaponCard extends BaseCommand {
         } else {
             embed.setTitle(`${card[0].name} | ${card[0].cardId}`)
                  .setImage(`${process.env.HS_IMG_API}${card[0].cardId}.png`)
-                 .setDescription(card[0].flavor)
+                 .setDescription(typeof card[0].flavor === 'undefined' ? '' : card[0].flavor)
                  .addField('Stats', [
                     "`Cost 💎: " + card[0].cost + "`",
                     "`Attack 🗡️: " + card[0].attack + "`",
