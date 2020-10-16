@@ -23,8 +23,8 @@ module.exports = class Urban extends BaseCommand {
                 title: `${info.word}`,
                 description: info.definition,
                 fields: [
-                    { name: 'Examples: ', value: `${info.example}` },
-                    { name: 'Rating: ', value: `${info.thumbsUp} thumbs up \n ${info.thumbsDown} thumbs down` }
+                    { name: 'Examples ', value: `${info.example}` },
+                    { name: 'Rating ', value: `${info.thumbsUp} thumbs up \n ${info.thumbsDown} thumbs down` }
                 ],
                 footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
                 thumbnail: { url: 'http://i.imgur.com/CcIZZsa.png' },

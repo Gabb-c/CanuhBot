@@ -16,15 +16,15 @@ module.exports = class Champion extends BaseCommand {
             title: `${data.name},  ${data.title}`,
             fields: [
 
-                { name: 'Base Stats:', value: [
-                    "`Health ♥: " + data.stats.hp + "`",
-                    "`" + data.partype + " 💧: " + data.stats.mp + "`",
-                    "`Armor 🛡️: " + data.stats.armor + "`",
-                    "`Magic Resist ⭕: " + data.stats.spellblock + "`",
-                    "`Attack Damage 🗡️: " + data.stats.attackdamage + "`",
-                    "`Attack Range 🏹: " + data.stats.attackrange + "`",
-                    "`Crit ⚡: " + data.stats.crit + "`",
-                    "`Movespeed ➡: " + data.stats.movespeed + "`"
+                { name: 'Base Stats', value: [
+                    "`Health ♥ " + data.stats.hp + "`",
+                    "`" + data.partype + " 💧 " + data.stats.mp + "`",
+                    "`Armor 🛡️ " + data.stats.armor + "`",
+                    "`Magic Resist ⭕ " + data.stats.spellblock + "`",
+                    "`Attack Damage 🗡️ " + data.stats.attackdamage + "`",
+                    "`Attack Range 🏹 " + data.stats.attackrange + "`",
+                    "`Crit ⚡ " + data.stats.crit + "`",
+                    "`Movespeed ➡ " + data.stats.movespeed + "`"
                 ].join('\n')},
                 
                 { name: `Passive  -  ${data.passive.name}`, value: [

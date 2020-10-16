@@ -14,7 +14,7 @@ module.exports = class Summoner extends BaseCommand {
         let embed = new MessageEmbed()
             .setTitle('Choose a region . . .')
             .setDescription([
-                regions.map((r, key) => `\`${key + 1}) ${r.name} ${r.flag}: ${r.cod}\``).join('\n')
+                regions.map((r, key) => `\`${key + 1}) ${r.name} ${r.flag} | ${r.cod}\``).join('\n')
             ])
             .setColor('#800080')
             .setTimestamp()
@@ -35,10 +35,15 @@ module.exports = class Summoner extends BaseCommand {
             msg.edit({ embed: {
                 title: summoner.name,
                 description: [
-                    `\`Level ${summoner.summonerLevel}\``,
-                    `\`Solo/Duo ${summoner.ranked.soloDuo.tier} ${summoner.ranked.soloDuo.rank} | ${summoner.ranked.soloDuo.wins}W ${summoner.ranked.soloDuo.losses}L\``,
-                    `\`Flex ${summoner.ranked.flex.tier} ${summoner.ranked.flex.rank} | ${summoner.ranked.flex.wins}W ${summoner.ranked.flex.losses}L\``
+                    `\`\`\`Level ${summoner.summonerLevel}`,
+                    `Solo/Duo ${summoner.ranked.soloDuo.tier} ${summoner.ranked.soloDuo.rank} | ${summoner.ranked.soloDuo.wins}W ${summoner.ranked.soloDuo.losses}L`,
+                    `Flex ${summoner.ranked.flex.tier} ${summoner.ranked.flex.rank} | ${summoner.ranked.flex.wins}W ${summoner.ranked.flex.losses}L\`\`\``
                 ].join('\n'),
+                fields: [
+                    { name: 'Maestries', value: [
+                        `\`\`\`${summoner.maestry.names.map((n, i) => `${n} M${summoner.maestry.maestries[i].championLevel} ${summoner.maestry.maestries[i].championPoints} pts`).join('\n')}\`\`\``
+                    ].join('\n') }
+                ],
                 thumbnail: { url: summoner.profileIcon },
                 footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
                 timestamp: new Date(),
