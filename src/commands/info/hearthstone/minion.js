@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 require('dotenv').config();
 
 module.exports = class MinionCard extends BaseCommand {
-    constructor () {
+    constructor() {
         super('hsminion', 'info', true, 'Shows information of a Hearthstone minion card!', '< card_name >', 5);
     }
 
@@ -13,14 +13,14 @@ module.exports = class MinionCard extends BaseCommand {
         const filter = m => (message.author.id === m.author.id) && (m.content >= 1 && m.content <= card.length);
 
         const result = await fetch(process.env.HS_API + cmdArgs.join(' '), {
-	        "method": "GET",
-	        "headers": {
-		        "x-rapidapi-host": process.env.HS_HOST,
-		        "x-rapidapi-key": process.env.HS_KEY
-	        }
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": process.env.HS_HOST,
+                "x-rapidapi-key": process.env.HS_KEY
+            }
         });
 
-        if(result.status != 200) throw `${message.author.username}, no results for "${cmdArgs.join(' ')}"`;
+        if (result.status != 200) throw `${message.author.username}, no results for "${cmdArgs.join(' ')}"`;
 
         let jsonResult = await result.json();
 
@@ -28,14 +28,14 @@ module.exports = class MinionCard extends BaseCommand {
             return element.type === 'Minion';
         });
 
-        if(card.length == '') throw `${message.author.username}, this command is only for minion cards . . .`;
+        if (card.length == '') throw `${message.author.username}, this command is only for minion cards . . .`;
 
         let embed = new MessageEmbed()
             .setColor('#800080')
             .setTimestamp()
             .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL());
 
-        if(card.length > 1) {
+        if (card.length > 1) {
             embed.setTitle(`Results for ${cmdArgs.join(' ')}`);
 
             card.forEach((element, key) => {
@@ -47,51 +47,51 @@ module.exports = class MinionCard extends BaseCommand {
                     "`Faction 🔖: " + (typeof element.faction === 'undefined' ? 'None' : element.faction) + "`",
                     "`Rarity ⭐: " + (typeof element.rarity === 'undefined' ? 'None' : element.rarity) + "`"
                 ].join('\n')
-                , true);
+                    , true);
             });
 
             await message.channel.send(embed);
 
-                message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] }).then(async collected => {
-                        const entry = collected.first().content;
-                        const choice = card[entry-1];
-                        let cardEmbed = new MessageEmbed()
-                           .setTitle(`${choice.name} | ${choice.cardId}`)
-                           .setDescription(typeof choice.flavor === 'undefined' ? '' : choice.flavor)
-                           .addField('Stats', [
-                                "`Cost 💎: " + choice.cost + "`",
-                                "`Attack 🗡️: " + choice.attack + "`",
-                                "`Health ♥: " + choice.health + "`",
-                                "`Card Set 🏷️: " + choice.cardSet + "`",
-                                "`Faction 🔖: " + (typeof choice.faction === 'undefined' ? 'None' : choice.faction) + "`",
-                                "`Rarity ⭐: " + (typeof choice.rarity === 'undefined' ? 'None' : choice.rarity) + "`"
-                            ].join('\n')
-                            , true)
-                           .setImage(`${process.env.HS_IMG_API}${choice.cardId}.png`)
-                           .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
-                           .setColor('#800080')
-                           .setTimestamp();
-                        message.channel.send(cardEmbed);
-                }).catch(err => {
-                    message.channel.send(`${message.author.username}, time's over . . .`);
-                });
+            message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] }).then(async collected => {
+                const entry = collected.first().content;
+                const choice = card[entry - 1];
+                let cardEmbed = new MessageEmbed()
+                    .setTitle(`${choice.name} | ${choice.cardId}`)
+                    .setDescription(typeof choice.flavor === 'undefined' ? '' : choice.flavor)
+                    .addField('Stats', [
+                        "`Cost 💎: " + choice.cost + "`",
+                        "`Attack 🗡️: " + choice.attack + "`",
+                        "`Health ♥: " + choice.health + "`",
+                        "`Card Set 🏷️: " + choice.cardSet + "`",
+                        "`Faction 🔖: " + (typeof choice.faction === 'undefined' ? 'None' : choice.faction) + "`",
+                        "`Rarity ⭐: " + (typeof choice.rarity === 'undefined' ? 'None' : choice.rarity) + "`"
+                    ].join('\n')
+                        , true)
+                    .setImage(`${process.env.HS_IMG_API}${choice.cardId}.png`)
+                    .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
+                    .setColor('#800080')
+                    .setTimestamp();
+                message.channel.send(cardEmbed);
+            }).catch(err => {
+                message.channel.send(`${message.author.username}, time's over . . .`);
+            });
 
         } else {
             embed.setTitle(`${card[0].name} | ${card[0].cardId}`)
-                 .setImage(`${process.env.HS_IMG_API}${card[0].cardId}.png`)
-                 embed.addField('Stats', [
-                    "`Cost 💎: " + card[0].cost + "`",
-                    "`Attack 🗡️: " + card[0].attack + "`",
-                    "`Health ♥: " + card[0].health + "`",
-                    "`Card Set 🏷️: " + card[0].cardSet + "`",
-                    "`Faction 🔖: " + (typeof card[0].faction === 'undefined' ? 'None' : card[0].faction) + "`",
-                    "`Rarity ⭐: " + (typeof card[0].rarity === 'undefined' ? 'None' : card[0].rarity) + "`"
-                ].join('\n'), true)
-                    .setDescription(typeof card[0].flavor === 'undefined' ? '' : card[0].flavor);
+                .setImage(`${process.env.HS_IMG_API}${card[0].cardId}.png`)
+            embed.addField('Stats', [
+                "`Cost 💎: " + card[0].cost + "`",
+                "`Attack 🗡️: " + card[0].attack + "`",
+                "`Health ♥: " + card[0].health + "`",
+                "`Card Set 🏷️: " + card[0].cardSet + "`",
+                "`Faction 🔖: " + (typeof card[0].faction === 'undefined' ? 'None' : card[0].faction) + "`",
+                "`Rarity ⭐: " + (typeof card[0].rarity === 'undefined' ? 'None' : card[0].rarity) + "`"
+            ].join('\n'), true)
+                .setDescription(typeof card[0].flavor === 'undefined' ? '' : card[0].flavor);
             message.channel.send(embed);
         }
     }
-    
+
 }
 
 /*
