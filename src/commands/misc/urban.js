@@ -17,8 +17,9 @@ module.exports = class Urban extends BaseCommand {
         let msg = await message.channel.send("Searching . . . 🔎");
 
         const info = await this.getDefinition(cmdArgs.join(' '));
+        console.log(info);
 
-        msg.edit({
+        await msg.edit({
             embed: {
                 title: `${info.word}`,
                 description: info.definition,
@@ -31,7 +32,7 @@ module.exports = class Urban extends BaseCommand {
                 timestamp: new Date(),
                 color: '#800080'
             }
-        });
+        }); 
     }
 
     async getDefinition(term) {
@@ -47,7 +48,7 @@ module.exports = class Urban extends BaseCommand {
             link: word.permalink,
             thumbsUp: word.thumbs_up,
             thumbsDown: word.thumbs_down,
-            example: word.example,
+            example: word.example === '' ? 'No examples ;-;' : word.example,
             author: word.author
         };
 

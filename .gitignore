@@ -9,6 +9,7 @@ lerna-debug.log*
 
 # Lavalink
 application.yml
+*.jar
 
 
 # Diagnostic reports (https://nodejs.org/api/report.html)

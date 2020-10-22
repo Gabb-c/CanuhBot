@@ -12,7 +12,6 @@ module.exports = class LorCard extends BaseCommand {
         await message.channel.send('Searching . . . 🔎');
 
         const card = await getCard(cmdArgs.join(' '));
-        console.log(card.response.card);
 
         if (card.response.card.length > 1) {
             let embed = new MessageEmbed()
