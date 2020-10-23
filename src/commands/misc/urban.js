@@ -17,7 +17,6 @@ module.exports = class Urban extends BaseCommand {
         let msg = await message.channel.send("Searching . . . 🔎");
 
         const info = await this.getDefinition(cmdArgs.join(' '));
-        console.log(info);
 
         await msg.edit({
             embed: {

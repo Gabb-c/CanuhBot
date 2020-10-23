@@ -8,12 +8,13 @@ module.exports = class Play extends BaseCommand {
     }
 
     async run(client, message, cmdArgs) {
+        return message.reply(' this commnand is not ready yet . . .');
         const res = await client.manager.search(
             cmdArgs,
             message.author
         );
 
-        const player = client.manager.create({
+        const player = await client.manager.create({
             guild: message.guild.id,
             voiceChannel: message.member.voice.channel.id,
             textChannel: message.channel.id

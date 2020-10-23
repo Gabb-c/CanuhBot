@@ -17,6 +17,7 @@ async function getChampionByName(champion) {
     info: champ.info,
     title: champ.title,
     lore: champ.blurb,
+    fullLore: `https://universe.leagueoflegends.com/en_US/story/champion/${champ.id.toLowerCase()}/`,
     skins: champ.skins,
     image: imgUrl + champ.image.full,
     splash: process.env.LOL_SPLASH_URL + champ.id + '_0.jpg',

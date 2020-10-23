@@ -14,6 +14,7 @@ module.exports = class Champion extends BaseCommand {
 
         await msg.edit( { embed: {
             title: `${data.name},  ${data.title}`,
+            description: `${data.lore}[+ see more!](${data.fullLore})`,
             fields: [
 
                 { name: 'Base Stats', value: [
