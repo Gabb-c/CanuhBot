@@ -1,5 +1,4 @@
 const BaseCommand = require('../../../utils/structures/BaseCommand');
-const { getItemList } = require('../../../utils/league/getItemList');
 const { getItemByName } = require('../../../utils/league/getItemByName');
 
 module.exports = class Item extends BaseCommand {
@@ -8,10 +7,30 @@ module.exports = class Item extends BaseCommand {
     }
 
     async run(client, message, cmdArgs) {
-        //const item = await getItemList();
-        //console.log(item.response.itemList);
+        let msg = await message.channel.send('Searching . . . 🔎');
 
         const card = await getItemByName(cmdArgs.join(' '));
-        console.log(card.response.card);
+        console.log(card.response.card[1]);
+
+        await msg.edit({
+            embed: {
+                title: card.response.card[1].name,
+                thumbnail: { url: card.response.image },
+                description: card.response.card[1].plaintext,
+                fields: [
+                    { name: 'Stats', value: [
+                        card.response.card[1].description.replace(/<[^>]*>/g, '  ')
+                    ].join('\n')},
+
+                    { name: 'Gold', value: [
+                        `\`Total  ${card.response.card[1].gold.total} 💰\``,
+                        `\`Sell  ${card.response.card[1].gold.sell} 💰\``
+                    ].join('\n')}
+                ],
+                color: '#800080',
+                footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
+                timestamp: new Date()
+            }
+        });
     }
 }

@@ -14,7 +14,7 @@ module.exports = class Champion extends BaseCommand {
 
         await msg.edit( { embed: {
             title: `${data.name},  ${data.title}`,
-            description: `${data.lore}[+ see more!](${data.fullLore})`,
+            description: `${data.lore}[+ see more!](${data.fullLore} 'Open ${data.name} official lore!  ')`,
             fields: [
 
                 { name: 'Base Stats', value: [
@@ -29,23 +29,23 @@ module.exports = class Champion extends BaseCommand {
                 ].join('\n')},
                 
                 { name: `Passive  -  ${data.passive.name}`, value: [
-                    "`Description:` " + data.passive.description
+                    "`Description:` " + data.passive.description.replace(/<[^>]*>/g, '')
                 ].join('\n') },
 
                 { name: `Q  -  ${data.spells[0].name}`, value: [
-                    "`Description:` " + data.spells[0].description
+                    "`Description:` " + data.spells[0].description.replace(/<[^>]*>/g, '')
                 ].join('\n') },
 
                 { name: `W  -  ${data.spells[1].name}`, value: [
-                    "`Description:` " + data.spells[1].description
+                    "`Description:` " + data.spells[1].description.replace(/<[^>]*>/g, '')
                 ].join('\n') },
 
                 { name: `E  -  ${data.spells[2].name}`, value: [
-                    "`Description:` " + data.spells[2].description
+                    "`Description:` " + data.spells[2].description.replace(/<[^>]*>/g, '')
                 ].join('\n') },
 
                 { name: `R  -  ${data.spells[3].name}`, value: [
-                    "`Description:` " + data.spells[3].description
+                    "`Description:` " + data.spells[3].description.replace(/<[^>]*>/g, '')
                 ].join('\n') }
 
             ],
