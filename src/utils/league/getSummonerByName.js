@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { LolApi, Constants } = require('twisted');
+const { LolApi } = require('twisted');
 const api = new LolApi({ key: process.env.LOL_API_KEY });
 const { getVersion } = require('./getVersion');
 const { getRankedByName } = require('./getRankedByName');
