@@ -14,7 +14,7 @@ module.exports = class Status extends BaseCommand {
         let embed = new MessageEmbed()
             .setTitle('Choose a region . . .')
             .setDescription([
-                regions.map((r, key) => `\`${key + 1}) ${r.name} ${r.flag}: ${r.cod}\``).join('\n')
+                regions.map((r, key) => `\`${key + 1}) ${r.name} ${r.flag} | ${r.cod}\``).join('\n')
             ])
             .setColor('#800080')
             .setTimestamp()

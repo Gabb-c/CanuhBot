@@ -8,7 +8,7 @@ client.manager = new Manager({
   nodes: [
     {
       host: process.env.HOST,
-      port: process.env.PORT,
+      port: Number.parseInt(process.env.PORT),
       password: process.env.PASSWORD,
       secure: false,
     },
