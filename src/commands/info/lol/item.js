@@ -10,7 +10,6 @@ module.exports = class Item extends BaseCommand {
         let msg = await message.channel.send('Searching . . . 🔎');
 
         const card = await getItemByName(cmdArgs.join(' '));
-        console.log(card.response.card);
 
         await msg.edit({
             embed: {

@@ -36,7 +36,7 @@ module.exports = class ItemList extends BaseCommand {
             await msg.edit({
                 embed: {
                     title: `${choice.name} items`,
-                    description: list.map(i => `${i[1].name} | ${i[1].plaintext} | ${i[1].gold.total}`).join('\n'),
+                    description: list.map(i => `${i[1].name}`).join('\n'),
                     footer: {
                         text: 'Requested by ' + message.author.username,
                         icon_url: message.author.displayAvatarURL(),
