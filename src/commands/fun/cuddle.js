@@ -17,7 +17,7 @@ module.exports = class Cuddle extends BaseCommand {
         if (message.mentions.users.first().id == client.user.id && message.author.id == process.env.BOT_OWNER_ID) return message.reply("B-Baka! >///<");
 
         const img = await neko.sfw.cuddle().catch(() => { throw `Sorry ${message.author.username}, I could not get any image . . .` });
-        console.log(message.mentions.users.first());
+        
         let embed = new MessageEmbed()
             .setTitle(`${message.author.username} cuddled ${message.mentions.users.first().username} ♥`)
             .setColor('#800080')

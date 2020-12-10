@@ -11,7 +11,7 @@ module.exports = class Champion extends BaseCommand {
         let msg = await message.channel.send('Searching . . . 🔎');
         
         const data = await getChampionByName(cmdArgs.join(' '));
-
+        
         await msg.edit( { embed: {
             title: `${data.name},  ${data.title}`,
             description: `${data.lore}[+ see more!](${data.fullLore} 'Open ${data.name} official lore!  ')`,

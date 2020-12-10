@@ -41,7 +41,7 @@ module.exports = class Status extends BaseCommand {
                 .setTimestamp()
                 .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL());
 
-            message.channel.send(msg);
+            await message.channel.send(msg);
 
         }).catch(err => {
             message.channel.send(`${message.author.username}, I could not ping . . .`);

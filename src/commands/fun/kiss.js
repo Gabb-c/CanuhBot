@@ -18,7 +18,6 @@ module.exports = class Kiss extends BaseCommand {
 
         const img = await neko.sfw.kiss().catch(() => { throw `Sorry ${message.author.username}, I could not get any image . . .` });
 
-
         let embed = new MessageEmbed()
             .setTitle(`${message.author.username} kissed ${message.mentions.users.first().username} ♥`)
             .setColor('#800080')
