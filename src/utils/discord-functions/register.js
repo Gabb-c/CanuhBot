@@ -9,7 +9,7 @@ async function registerCommands(client, dir = '') {
 
   for (const file of files) {
     const stat = await fs.lstat(path.join(filePath, file));
-    if (stat.isDirectory()) registerCommands(client, path.join(dir, file));
+    stat.isDirectory() ? registerCommands(client, path.join(dir, file)) : null;
     if (file.endsWith('.js')) {
       const Command = require(path.join(filePath, file));
 
@@ -27,7 +27,7 @@ async function registerDiscordEvents(client, dir = '') {
 
   for (const file of files) {
     const stat = await fs.lstat(path.join(filePath, file));
-    if (stat.isDirectory()) registerDiscordEvents(client, path.join(dir, file));
+    stat.isDirectory() ? registerDiscordEvents(client, path.join(dir, file)) : null;
     if (file.endsWith('.js')) {
       const Event = require(path.join(filePath, file));
 
@@ -45,7 +45,7 @@ async function registerMusicEvents(client, dir = '') {
 
   for (const file of files) {
     const stat = await fs.lstat(path.join(filePath, file));
-    if (stat.isDirectory()) registerMusicEvents(client, path.join(dir, file));
+    stat.isDirectory() ? registerMusicEvents(client, path.join(dir, file)) : null;
     if (file.endsWith('.js')) {
       const Event = require(path.join(filePath, file));
 
@@ -63,8 +63,7 @@ async function registerProcessEvents(dir = '') {
 
   for (const file of files) {
     const stat = await fs.lstat(path.join(filePath, file));
-    if (stat.isDirectory())
-      registerProcessEvents(process, path.join(dir, file));
+    stat.isDirectory() ? registerProcessEvents(process, path.join(dir, file)) : null;
     if (file.endsWith('.js')) {
       const Event = require(path.join(filePath, file));
 

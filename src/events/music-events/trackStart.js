@@ -7,7 +7,7 @@ module.exports = class TrackStart extends BaseEvent {
     }
 
     async run(client, player, track) {
-        console.log(boxen(`Now playing: ${track.title}`, { padding: 1, borderColor: '#ff0883'}));
+        console.log(player);
     }
 
 }
