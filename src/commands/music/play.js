@@ -1,13 +1,13 @@
 const BaseCommand = require('../../utils/structures/BaseCommand');
 require('dotenv').config();
-const { MessageEmbed } = require('discord.js');
-
 module.exports = class Play extends BaseCommand {
     constructor() {
         super('play', 'music', true, 'Play some music!', '< music_name >', 5);
     }
 
     async run(client, message, cmdArgs) {
+        if (message.member.voice.channel === null) throw `${message.author.username}, please join in a voice channel first . . .`;
+
         let msg = await message.channel.send('Searching . . . 🔎');
 
         const res = await client.manager.search(

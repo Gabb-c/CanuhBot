@@ -6,7 +6,7 @@ module.exports = class Skip extends BaseCommand {
         super('skip', 'music', false, 'Skip to the next music!', '', 5);
     }
 
-    async run(client, message, cmdArgs) {
+    async run(client, message, cmdArgs, player) {
         console.log(client.manager);
     }
        
