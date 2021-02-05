@@ -7,7 +7,7 @@ module.exports = class NodeConnect extends BaseEvent {
     }
 
     async run(client) {
-        console.log(boxen('New node connected!', { padding: 1, borderColor: '#ff0883'}));
+        console.log(boxen('New node connected!', { padding: 1, borderColor: '#ff0883' }));
     }
 
 }

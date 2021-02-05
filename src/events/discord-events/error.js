@@ -2,7 +2,7 @@ const BaseEvent = require('../../utils/structures/BaseEvent')
 const boxen = require('boxen');
 
 module.exports = class ErrorEvent extends BaseEvent {
-    constructor () {
+    constructor() {
         super('error');
     }
 

@@ -15,7 +15,7 @@ async function getSummonerByName(nickname, region) {
       throw `No ranked results for ${nickname} at ${region}`;
     }
   );
-  
+
   const maestry = await getMaestryByID(player.response.id, region);
 
   const version = await getVersion();

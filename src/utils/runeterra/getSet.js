@@ -15,7 +15,7 @@ async function getSet() {
     const globals = await fetch('https://dd.b.pvp.net/latest/core/en_us/data/globals-en_us.json')
         .then(data => data.json())
         .catch(() => { throw 'Globals not founded . . .' });
-        
+
     return {
         response: {
             set: sets,

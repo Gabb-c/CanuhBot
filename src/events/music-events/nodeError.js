@@ -7,7 +7,7 @@ module.exports = class NodeError extends BaseEvent {
     }
 
     async run(client, node, error) {
-        console.log(boxen(`Node error! \n${error.message}`, { padding: 1, borderColor: '#ff0883'}));
+        console.log(boxen(`Node error! \n${error.message}`, { padding: 1, borderColor: '#ff0883' }));
     }
 
 }

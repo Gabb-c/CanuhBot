@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 require('dotenv').config();
 
 module.exports = class HeroCard extends BaseCommand {
-    constructor () {
+    constructor() {
         super('hshero', 'info', true, 'Shows information of a Hearthstone hero card!', '< card_name >', 5);
     }
 
@@ -12,29 +12,29 @@ module.exports = class HeroCard extends BaseCommand {
         await message.channel.send("Searching . . . 🔎");
 
         const result = await fetch(process.env.HS_API + cmdArgs.join(' '), {
-	        "method": "GET",
-	        "headers": {
-		        "x-rapidapi-host": process.env.HS_HOST,
-		        "x-rapidapi-key": process.env.HS_KEY
-	        }
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": process.env.HS_HOST,
+                "x-rapidapi-key": process.env.HS_KEY
+            }
         });
 
-        if(result.status != 200) throw `${message.author.username}, no results for "${cmdArgs.join(' ')}"`;
+        if (result.status != 200) throw `${message.author.username}, no results for "${cmdArgs.join(' ')}"`;
 
         let jsonResult = await result.json();
 
         let card = await jsonResult.filter(element => {
             return element.type === 'Hero' && element.collectible === true && !(element.rarity === 'Free');
         });
-        
-        if(card.length == '') throw `${message.author.username}, this command is only for hero cards . . .`;
+
+        if (card.length == '') throw `${message.author.username}, this command is only for hero cards . . .`;
 
         let embed = new MessageEmbed()
             .setColor('#800080')
             .setTimestamp()
             .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL());
 
-        if(card.length > 1) {
+        if (card.length > 1) {
             embed.setTitle(`Results for ${cmdArgs.join(' ')}`);
 
             card.forEach((element, key) => {
@@ -46,43 +46,43 @@ module.exports = class HeroCard extends BaseCommand {
                     "`Rarity ⭐: " + element.rarity + "`",
                     "`Class 📜: " + element.playerClass + "`"
                 ].join('\n')
-                , true);
+                    , true);
             });
 
             message.channel.send(embed).then(() => {
                 const filter = m => (message.author.id === m.author.id) && (m.content >= 1 && m.content <= card.length);
 
                 message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] }).then(collected => {
-                        const entry = collected.first().content;
-                        const choice = card[entry-1];
-                        let cardEmbed = new MessageEmbed()
-                           .setTitle(`${choice.name} | ${choice.cardId}`)
-                           .setDescription(choice.flavor)
-                           .addField('Stats', [
-                                "`Cost 💎: " + choice.cost + "`",
-                                "`Health ♥: " + choice.health + "`",
-                                "`Armor 🛡️: " + choice.armor + "`",
-                                "`Card Set 🏷️: " + choice.cardSet + "`",
-                                "`Rarity ⭐: " + choice.rarity + "`",
-                                "`Class 📜: " + choice.playerClass + "`"
-                            ].join('\n')
+                    const entry = collected.first().content;
+                    const choice = card[entry - 1];
+                    let cardEmbed = new MessageEmbed()
+                        .setTitle(`${choice.name} | ${choice.cardId}`)
+                        .setDescription(choice.flavor)
+                        .addField('Stats', [
+                            "`Cost 💎: " + choice.cost + "`",
+                            "`Health ♥: " + choice.health + "`",
+                            "`Armor 🛡️: " + choice.armor + "`",
+                            "`Card Set 🏷️: " + choice.cardSet + "`",
+                            "`Rarity ⭐: " + choice.rarity + "`",
+                            "`Class 📜: " + choice.playerClass + "`"
+                        ].join('\n')
                             , true)
-                           .setImage(`${process.env.HS_IMG_API}${choice.cardId}.png`)
-                           .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
-                           .setColor('#800080')
-                           .setTimestamp();
-                        message.channel.send(cardEmbed);
+                        .setImage(`${process.env.HS_IMG_API}${choice.cardId}.png`)
+                        .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL()}`)
+                        .setColor('#800080')
+                        .setTimestamp();
+                    message.channel.send(cardEmbed);
                 }).catch(err => {
                     message.channel.send(`${message.author.username}, time's over . . .`);
                 });
-                
+
             });
 
         } else {
             embed.setTitle(`${card[0].name} | ${card[0].cardId}`)
-                 .setImage(`${process.env.HS_IMG_API}${card[0].cardId}.png`)
-                 .setDescription(card[0].flavor)
-                 .addField('Stats', [
+                .setImage(`${process.env.HS_IMG_API}${card[0].cardId}.png`)
+                .setDescription(card[0].flavor)
+                .addField('Stats', [
                     "`Cost 💎: " + card[0].cost + "`",
                     "`Health ♥: " + card[0].health + "`",
                     "`Armor 🛡️: " + card[0].armor + "`",
@@ -90,11 +90,11 @@ module.exports = class HeroCard extends BaseCommand {
                     "`Rarity ⭐: " + card[0].rarity + "`",
                     "`Class 📜: " + card[0].playerClass + "`"
                 ].join('\n')
-                , true);
+                    , true);
             message.channel.send(embed);
         }
     }
-    
+
 }
 
 /*

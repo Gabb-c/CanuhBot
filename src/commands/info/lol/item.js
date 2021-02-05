@@ -17,14 +17,18 @@ module.exports = class Item extends BaseCommand {
                 thumbnail: { url: card.response.image },
                 description: card.response.card[1].plaintext,
                 fields: [
-                    { name: 'Stats', value: [
-                        card.response.card[1].description.replace(/<[^>]*>/g, '  ')
-                    ].join('\n')},
+                    {
+                        name: 'Stats', value: [
+                            card.response.card[1].description.replace(/<[^>]*>/g, '  ')
+                        ].join('\n')
+                    },
 
-                    { name: 'Gold', value: [
-                        `\`Total  ${card.response.card[1].gold.total} 💰\``,
-                        `\`Sell  ${card.response.card[1].gold.sell} 💰\``
-                    ].join('\n')}
+                    {
+                        name: 'Gold', value: [
+                            `\`Total  ${card.response.card[1].gold.total} 💰\``,
+                            `\`Sell  ${card.response.card[1].gold.sell} 💰\``
+                        ].join('\n')
+                    }
                 ],
                 color: '#800080',
                 footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },

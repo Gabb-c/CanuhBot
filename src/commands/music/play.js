@@ -11,21 +11,25 @@ module.exports = class Play extends BaseCommand {
         let msg = await message.channel.send('Searching . . . 🔎');
 
         const res = await client.manager.search(
-            cmdArgs,
+            cmdArgs.join(' '),
             message.author
         );
 
+        console.log(res);
+
         if (res.loadType === 'NO_MATCHES') throw `I'm sorry ${message.author.username}, couldn't find any songs .-.`
 
-        await msg.edit({ embed: {
-            title: '**Choose your song**',
-            description: [
-                res.tracks.map((song, key) => `${key + 1}) ${song.title}`).join('\n'),
-            ].join('\n'),
-            footer: { text: 'Requested by ' + message.author.username, icon_url: message.author.displayAvatarURL() },
-            timestamp: new Date(),
-            color: '#800080',
-        }});
+        await msg.edit({
+            embed: {
+                title: '**Choose your song**',
+                description: [
+                    res.tracks.map((song, key) => `${key + 1}) ${song.title}`).join('\n'),
+                ].join('\n'),
+                footer: { text: 'Requested by ' + message.author.username, icon_url: message.author.displayAvatarURL() },
+                timestamp: new Date(),
+                color: '#800080',
+            }
+        });
 
         const filter = m => (message.author.id === m.author.id) && (m.content >= 1 && m.content <= res.tracks.length);
 
@@ -60,9 +64,9 @@ module.exports = class Play extends BaseCommand {
             // For playlists
             !player.playing && !player.paused && player.queue.size === res.tracks.length ? player.play() : null;
 
-            }).catch(err => {
-                message.channel.send(`${message.author.username}, time's over . . .`);
-            });
+        }).catch(err => {
+            message.channel.send(`${message.author.username}, time's over . . .`);
+        });
 
-        }
+    }
 }

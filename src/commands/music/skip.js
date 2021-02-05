@@ -7,7 +7,12 @@ module.exports = class Skip extends BaseCommand {
     }
 
     async run(client, message, cmdArgs, player) {
-        console.log(client.manager);
+        const players = new Map(client.manager.players);
+
+        const actual = players.get(message.guild.id);
+        console.log(actual)
+
+        actual.play();
     }
-       
+
 }

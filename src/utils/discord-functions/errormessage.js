@@ -6,7 +6,7 @@ async function errorMessage(message, error, command) {
         .setColor('#800080')
         .setTimestamp()
         .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL());
-        
+
 
     if (error instanceof Error) {
         raven.captureMessage(`Command Error: ${command.name}\n${error.stack || error}`);

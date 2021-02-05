@@ -7,7 +7,7 @@ module.exports = class NodeReconnect extends BaseEvent {
     }
 
     async run(client, node) {
-        console.log(boxen('Node reconnected!', { padding: 1, borderColor: '#ff0883'}));
+        console.log(boxen('Node reconnected!', { padding: 1, borderColor: '#ff0883' }));
     }
 
 }

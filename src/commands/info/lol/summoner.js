@@ -26,34 +26,38 @@ module.exports = class Summoner extends BaseCommand {
 
         message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] }).then(async collected => {
             const entry = collected.first().content;
-            const choice = regions[entry-1];
+            const choice = regions[entry - 1];
 
             let msg = await message.channel.send('Searching . . . 🔎');
 
             const summoner = await getSummonerByName(cmdArgs.join(' '), choice.cod);
 
-            msg.edit({ embed: {
-                title: summoner.name,
-                description: [
-                    `\`\`\`Level ${summoner.summonerLevel}`,
-                    `Solo/Duo ${summoner.ranked.soloDuo.tier} ${summoner.ranked.soloDuo.rank} | ${summoner.ranked.soloDuo.wins}W ${summoner.ranked.soloDuo.losses}L`,
-                    `Flex ${summoner.ranked.flex.tier} ${summoner.ranked.flex.rank} | ${summoner.ranked.flex.wins}W ${summoner.ranked.flex.losses}L\`\`\``
-                ].join('\n'),
-                fields: [
-                    { name: 'Maestries', value: [
-                        `\`\`\`${summoner.maestry.names.map((n, i) => `${n} M${summoner.maestry.maestries[i].championLevel} ${summoner.maestry.maestries[i].championPoints} pts`).join('\n')}\`\`\``
-                    ].join('\n') }
-                ],
-                thumbnail: { url: summoner.profileIcon },
-                footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
-                timestamp: new Date(),
-                color: '#800080'
-            }});
+            msg.edit({
+                embed: {
+                    title: summoner.name,
+                    description: [
+                        `\`\`\`Level ${summoner.summonerLevel}`,
+                        `Solo/Duo ${summoner.ranked.soloDuo.tier} ${summoner.ranked.soloDuo.rank} | ${summoner.ranked.soloDuo.wins}W ${summoner.ranked.soloDuo.losses}L`,
+                        `Flex ${summoner.ranked.flex.tier} ${summoner.ranked.flex.rank} | ${summoner.ranked.flex.wins}W ${summoner.ranked.flex.losses}L\`\`\``
+                    ].join('\n'),
+                    fields: [
+                        {
+                            name: 'Maestries', value: [
+                                `\`\`\`${summoner.maestry.names.map((n, i) => `${n} M${summoner.maestry.maestries[i].championLevel} ${summoner.maestry.maestries[i].championPoints} pts`).join('\n')}\`\`\``
+                            ].join('\n')
+                        }
+                    ],
+                    thumbnail: { url: summoner.profileIcon },
+                    footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
+                    timestamp: new Date(),
+                    color: '#800080'
+                }
+            });
 
         }).catch(err => {
             message.channel.send(`${message.author.username}, nothing founded . . .`);
         });
-        
+
     }
 
 }

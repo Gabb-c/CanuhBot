@@ -2,7 +2,7 @@ const BaseCommand = require('../../../utils/structures/BaseCommand');
 const { MessageEmbed } = require('discord.js');
 const { LolApi } = require('twisted');
 const { getStatusByShard } = require('../../../utils/league/getStatusByShard');
-const api = new LolApi( { key: process.env.LOL_API_KEY } );
+const api = new LolApi({ key: process.env.LOL_API_KEY });
 const regions = require('../../../utils/league/regions');
 
 module.exports = class Status extends BaseCommand {
@@ -26,7 +26,7 @@ module.exports = class Status extends BaseCommand {
 
         message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] }).then(async collected => {
             const entry = collected.first().content;
-            const choice = regions[entry-1];
+            const choice = regions[entry - 1];
 
             await message.channel.send('Pinging . . .');
 

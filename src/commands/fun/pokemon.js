@@ -12,26 +12,16 @@ module.exports = class Pokemon extends BaseCommand {
 
         let msg = await message.channel.send('Searching . . . ');
 
-        let result = await fetch(`${url}/${cmdArgs.join(' ')}`);
-
-        if (result.status != 200) {
-            throw `${message.author.username}, no results for "${cmdArgs}"`;
-        } else {
-            let pokemon = await result.json();
-
-            msg.edit({
-                embed: {
-                    title: `${pokemon.name.toUpperCase()}`,
-                    image: { url: `${pokemon.sprites.front_default}` },
-                    fields: [
-                        { name: 'Abilities', value: `${pokemon.abilities.map((a) => a.ability.name).join('\n')}` }
-                    ],
-                    color: '#800080'
-                }
-            });
-        }
-
-
+        let pokemon = await fetch(`${url}/${cmdArgs.join(' ')}`).then(data => data.json())
+            .catch(err => { throw `No results for ${cmdArgs.join(' ')}` });
+        await msg.edit({
+            embed: {
+                title: `${pokemon.name.toUpperCase()}`,
+                description: '```\n```',
+                image: { url: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png` },
+                color: 'RANDOM'
+            }
+        });
 
     }
 

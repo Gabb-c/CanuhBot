@@ -10,10 +10,10 @@ async function getMaestryByID(summonerId, region) {
 
     let names = [];
 
-    for await(r of res) {
+    for await (r of res) {
         await api.DataDragon.getChampion(r.championId).then(data => names.push(data.name));
     }
-    
+
     return {
         score: score,
         names: names,

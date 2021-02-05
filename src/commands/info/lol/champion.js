@@ -3,58 +3,72 @@ require('dotenv').config();
 const { getChampionByName } = require('../../../utils/league/getChampionByName');
 
 module.exports = class Champion extends BaseCommand {
-    constructor () {
+    constructor() {
         super('champion', 'info', true, 'Shows a lol champion', '< champion >', 5);
     }
 
-    async run(client, message, cmdArgs) {        
+    async run(client, message, cmdArgs) {
         let msg = await message.channel.send('Searching . . . 🔎');
-        
+
         const data = await getChampionByName(cmdArgs.join(' '));
-        
-        await msg.edit( { embed: {
-            title: `${data.name},  ${data.title}`,
-            description: `${data.lore}[+ see more!](${data.fullLore} 'Open ${data.name} official lore!  ')`,
-            fields: [
 
-                { name: 'Base Stats', value: [
-                    "`Health ♥ " + data.stats.hp + "`",
-                    "`" + data.partype + " 💧 " + data.stats.mp + "`",
-                    "`Armor 🛡️ " + data.stats.armor + "`",
-                    "`Magic Resist ⭕ " + data.stats.spellblock + "`",
-                    "`Attack Damage 🗡️ " + data.stats.attackdamage + "`",
-                    "`Attack Range 🏹 " + data.stats.attackrange + "`",
-                    "`Crit ⚡ " + data.stats.crit + "`",
-                    "`Movespeed ➡ " + data.stats.movespeed + "`"
-                ].join('\n')},
-                
-                { name: `Passive  -  ${data.passive.name}`, value: [
-                    "`Description:` " + data.passive.description.replace(/<[^>]*>/g, '')
-                ].join('\n') },
+        await msg.edit({
+            embed: {
+                title: `${data.name},  ${data.title}`,
+                description: `${data.lore}[+ see more!](${data.fullLore} 'Open ${data.name} official lore!  ')`,
+                fields: [
 
-                { name: `Q  -  ${data.spells[0].name}`, value: [
-                    "`Description:` " + data.spells[0].description.replace(/<[^>]*>/g, '')
-                ].join('\n') },
+                    {
+                        name: 'Base Stats', value: [
+                            "`Health ♥ " + data.stats.hp + "`",
+                            "`" + data.partype + " 💧 " + data.stats.mp + "`",
+                            "`Armor 🛡️ " + data.stats.armor + "`",
+                            "`Magic Resist ⭕ " + data.stats.spellblock + "`",
+                            "`Attack Damage 🗡️ " + data.stats.attackdamage + "`",
+                            "`Attack Range 🏹 " + data.stats.attackrange + "`",
+                            "`Crit ⚡ " + data.stats.crit + "`",
+                            "`Movespeed ➡ " + data.stats.movespeed + "`"
+                        ].join('\n')
+                    },
 
-                { name: `W  -  ${data.spells[1].name}`, value: [
-                    "`Description:` " + data.spells[1].description.replace(/<[^>]*>/g, '')
-                ].join('\n') },
+                    {
+                        name: `Passive  -  ${data.passive.name}`, value: [
+                            "`Description:` " + data.passive.description.replace(/<[^>]*>/g, '')
+                        ].join('\n')
+                    },
 
-                { name: `E  -  ${data.spells[2].name}`, value: [
-                    "`Description:` " + data.spells[2].description.replace(/<[^>]*>/g, '')
-                ].join('\n') },
+                    {
+                        name: `Q  -  ${data.spells[0].name}`, value: [
+                            "`Description:` " + data.spells[0].description.replace(/<[^>]*>/g, '')
+                        ].join('\n')
+                    },
 
-                { name: `R  -  ${data.spells[3].name}`, value: [
-                    "`Description:` " + data.spells[3].description.replace(/<[^>]*>/g, '')
-                ].join('\n') }
+                    {
+                        name: `W  -  ${data.spells[1].name}`, value: [
+                            "`Description:` " + data.spells[1].description.replace(/<[^>]*>/g, '')
+                        ].join('\n')
+                    },
 
-            ],
-            image: { url: data.splash },
-            thumbnail: { url: data.image },
-            color: '#800080',
-            footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
-            timestamp: new Date()
-        }});
+                    {
+                        name: `E  -  ${data.spells[2].name}`, value: [
+                            "`Description:` " + data.spells[2].description.replace(/<[^>]*>/g, '')
+                        ].join('\n')
+                    },
+
+                    {
+                        name: `R  -  ${data.spells[3].name}`, value: [
+                            "`Description:` " + data.spells[3].description.replace(/<[^>]*>/g, '')
+                        ].join('\n')
+                    }
+
+                ],
+                image: { url: data.splash },
+                thumbnail: { url: data.image },
+                color: '#800080',
+                footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
+                timestamp: new Date()
+            }
+        });
 
     }
 

@@ -30,9 +30,9 @@ module.exports = class Season extends BaseCommand {
             const choiceSeason = seasons[entrySeason - 1];
 
             embed.setTitle('Choose the type')
-                 .setDescription([
-                     types.map((type, key) => `\`${key + 1}) ${type.name}\``).join('\n')
-                 ].join('\n'));
+                .setDescription([
+                    types.map((type, key) => `\`${key + 1}) ${type.name}\``).join('\n')
+                ].join('\n'));
 
             await message.channel.send(embed);
 
@@ -46,15 +46,17 @@ module.exports = class Season extends BaseCommand {
                 const res = await Aniclient.getSeason(cmdArgs.join(' '), choiceSeason.code, choiceType.cod);
                 console.log(res);
 
-                await msg.edit({ embed: {
-                    title: `${choiceType.cod} of ${cmdArgs.join(' ')}`,
-                    description: [
-                        res.map((r, key) => `${r.title}`).join('\n')
-                    ].join('\n'),
-                    color: '#800080',
-                    footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
-                    timestamp: new Date(),
-                }});
+                await msg.edit({
+                    embed: {
+                        title: `${choiceType.cod} of ${cmdArgs.join(' ')}`,
+                        description: [
+                            res.map((r, key) => `${r.title}`).join('\n')
+                        ].join('\n'),
+                        color: '#800080',
+                        footer: { text: "Requested by " + message.author.username, icon_url: message.author.displayAvatarURL() },
+                        timestamp: new Date(),
+                    }
+                });
 
             }).catch(err => {
                 message.channel.send(`${message.author.username}, nothing founded . . .`);

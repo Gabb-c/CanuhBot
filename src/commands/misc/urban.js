@@ -31,7 +31,7 @@ module.exports = class Urban extends BaseCommand {
                 timestamp: new Date(),
                 color: '#800080'
             }
-        }); 
+        });
     }
 
     async getDefinition(term) {

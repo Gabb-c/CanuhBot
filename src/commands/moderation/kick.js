@@ -3,7 +3,7 @@ require('dotenv').config();
 const { MessageEmbed } = require('discord.js');
 
 module.exports = class Kick extends BaseCommand {
-    constructor () {
+    constructor() {
         super('kick', 'moderation', true, 'Kicks the mentioned person!', '< mention >', 5);
     }
 

@@ -7,7 +7,7 @@ module.exports = class TrackStart extends BaseEvent {
     }
 
     async run(client, player, track) {
-        console.log(player);
+        console.log(track);
     }
 
 }

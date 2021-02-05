@@ -2,7 +2,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 require('dotenv').config();
 const { MessageEmbed } = require('discord.js');
 module.exports = class Ban extends BaseCommand {
-    constructor () {
+    constructor() {
         super('ban', 'moderation', true, 'Bans the mentioned person!', '< mention >', 5);
     }
 

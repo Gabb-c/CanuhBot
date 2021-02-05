@@ -8,7 +8,7 @@ async function getItemByName(name) {
     const card = list.response.itemList.filter(c => { return c[1].name.toLowerCase() === name });
     const { latest } = await getVersion();
 
-    if(card.length === 0) { throw `No results for "${name}"` } 
+    if (card.length === 0) { throw `No results for "${name}"` }
 
     return {
         response: {
