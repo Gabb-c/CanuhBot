@@ -10,7 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/bot.js",
-    "dev": "nodemon ./src/bot.js"
+    "dev": "nodemon ./src/bot.js",
+    "lava": "java -jar Lavalink.jar"
   },
   "keywords": [
     "discord",

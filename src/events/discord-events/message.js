@@ -11,7 +11,7 @@ module.exports = class MesssageEvent extends BaseEvent {
     }
 
     async run(client, message) {
-        if (message.author.bot) return;
+        if (message.author.bot || message.channel.type === 'dm') return;
 
         if (message.content.startsWith(process.env.BOT_PREFIX)) {
             const [cmdName, ...cmdArgs] = message.content

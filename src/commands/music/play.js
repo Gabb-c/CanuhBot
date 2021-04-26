@@ -7,6 +7,7 @@ module.exports = class Play extends BaseCommand {
 
     async run(client, message, cmdArgs) {
         if (message.member.voice.channel === null) throw `${message.author.username}, please join in a voice channel first . . .`;
+        console.log(message.author);
 
         let msg = await message.channel.send('Searching . . . 🔎');
 
@@ -59,7 +60,7 @@ module.exports = class Play extends BaseCommand {
                 }
             });
 
-            !player.playing && !player.paused && !player.queue.length ? player.play() : null;
+            !player.playing && !player.paused && !player.queue.length ? await player.play() : null;
 
             // For playlists
             !player.playing && !player.paused && player.queue.size === res.tracks.length ? player.play() : null;
